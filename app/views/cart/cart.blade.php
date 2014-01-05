@@ -2,7 +2,7 @@
 
 @section('page')
 <form role="form" action="" method="post">
-<table class="table table-bordered xtable-hover">
+<table class="table table-bordered">
 	<thead>
 		<tr>
 			<td class="col-md-6">Name</td>
