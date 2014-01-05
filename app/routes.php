@@ -20,7 +20,6 @@ Route::get('cart/{id}/remove', 'CartController@delete');
 Route::get('cart/destroy', 'CartController@destroy');
 
 Route::get('wishlist', 'WishlistController@index');
-Route::post('wishlist', 'WishlistController@update');
 Route::get('wishlist/{id}/add', 'WishlistController@add');
 Route::get('wishlist/{id}/remove', 'WishlistController@delete');
 Route::get('wishlist/destroy', 'WishlistController@destroy');

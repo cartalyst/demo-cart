@@ -1,12 +1,10 @@
 @extends('cart.layouts.default')
 
 @section('page')
-<form role="form" action="" method="post">
 <table class="table table-bordered xtable-hover">
 	<thead>
 		<tr>
-			<td class="col-md-6">Name</td>
-			<td class="col-md-1">Quantity</td>
+			<td class="col-md-7">Name</td>
 			<td class="col-md-1">Price</td>
 			<td class="col-md-2" colspan="2">Total</td>
 		</tr>
@@ -14,7 +12,7 @@
 	<tbody>
 		@if ($items->isEmpty())
 		<tr>
-			<td colspan="5">Your shopping cart is empty.</td>
+			<td colspan="3">Your shopping cart is empty.</td>
 		</tr>
 		@else
 		@foreach ($items as $item)
@@ -44,9 +42,6 @@
 				@endif
 				<br>
 			</td>
-			<td>
-				<input class="form-control" type="text" name="update[{{{ $item->get('rowId') }}}][quantity]" value="{{{ $item->get('quantity') }}}" />
-			</td>
 			<td>{{{ Converter::value($item->get('price'))->from('currency.eur')->to('currency.usd')->format() }}}</td>
 			<td>
 				{{{ Converter::value($item->subTotal())->from('currency.eur')->to('currency.usd')->format() }}}
@@ -57,13 +52,13 @@
 		</tr>
 		@endforeach
 		<tr>
-			<td colspan="4">
+			<td colspan="3">
 				<span class="pull-right">Items</span>
 			</td>
 			<td colspan="2">{{{ Cart::quantity() }}}</td>
 		</tr>
 		<tr>
-			<td colspan="4">
+			<td colspan="3">
 				<span class="pull-right">Subtotal</span>
 			</td>
 			<td colspan="2">{{{ Converter::value($cart->subtotal())->from('currency.eur')->to('currency.usd')->format() }}}</td>
@@ -74,7 +69,7 @@
 		{{-- Only show the condition if it's valid --}}
 		@if ($condition->get('valid'))
 		<tr>
-			<td colspan="4">
+			<td colspan="3">
 				<span class="pull-right">{{ $condition->get('name') }}</span>
 			</td>
 			<td colspan="2">{{-- Converter::value($cart->discountValue($condition))->to('currency.usd')->format() --}}</td>
@@ -85,7 +80,7 @@
 		{{-- Taxes --}}
 		@foreach ($cart->taxes() as $rate)
 		<tr>
-			<td colspan="4">
+			<td colspan="3">
 				<span class="pull-right">{{ $rate->get('name') }}</span>
 			</td>
 			<td colspan="2">{{ Converter::value($rate->get('result'))->from('currency.usd')->to('currency.eur')->format() }}</td>
@@ -93,20 +88,20 @@
 		@endforeach
 
 		<tr>
-			<td colspan="4">
+			<td colspan="3">
 				<span class="pull-right">Cart Weight</span>
 			</td>
 			<td colspan="2">{{{ Converter::value($cart->weight())->from('weight.g')->to('weight.kg')->format() }}}</td>
 		</tr>
 
 		<tr>
-			<td colspan="4">
+			<td colspan="3">
 				<span class="pull-right">Total Usd</span>
 			</td>
 			<td colspan="2">{{{ Converter::value($total)->to('currency.usd')->format() }}}</td>
 		</tr>
 		<tr>
-			<td colspan="4">
+			<td colspan="3">
 				<span class="pull-right">Total Eur</span>
 			</td>
 			<td colspan="2">{{{ Converter::value($total)->from('currency.usd')->to('currency.eur')->convert()->format() }}}</td>
@@ -116,13 +111,8 @@
 </table>
 
 @if ( ! $items->isEmpty())
-<button type="submit" class="btn btn-info">Update</button>
 <a href="{{ URL::to('wishlist/destroy') }}" class="btn btn-danger">Empty Cart</a>
-<div class="pull-right">
-	<a href="#" class="btn btn-warning">Checkout</a>
-</div>
 @endif
-</form>
 
 <br>
 @stop

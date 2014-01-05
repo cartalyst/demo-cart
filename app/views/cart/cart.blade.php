@@ -14,7 +14,7 @@
 	<tbody>
 		@if ($items->isEmpty())
 		<tr>
-			<td colspan="5">Your shopping cart is empty.</td>
+			<td colspan="4">Your shopping cart is empty.</td>
 		</tr>
 		@else
 		@foreach ($items as $item)

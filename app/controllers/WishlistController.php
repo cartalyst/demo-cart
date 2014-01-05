@@ -29,13 +29,6 @@ class WishlistController extends BaseController {
 		return Redirect::to('wishlist');
 	}
 
-	public function update()
-	{
-		Cart::update(Input::get('update'));
-
-		return Redirect::to('wishlist');
-	}
-
 	public function delete($id)
 	{
 		Cart::instance('wishlist')->remove($id);
