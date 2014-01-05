@@ -12,7 +12,7 @@
 	<tbody>
 		@if ($items->isEmpty())
 		<tr>
-			<td colspan="3">Your shopping cart is empty.</td>
+			<td colspan="3">Your wishlist is empty.</td>
 		</tr>
 		@else
 		@foreach ($items as $item)
@@ -111,7 +111,7 @@
 </table>
 
 @if ( ! $items->isEmpty())
-<a href="{{ URL::to('wishlist/destroy') }}" class="btn btn-danger">Empty Cart</a>
+<a href="{{ URL::to('wishlist/destroy') }}" class="btn btn-danger">Empty Wishlist</a>
 @endif
 
 <br>
