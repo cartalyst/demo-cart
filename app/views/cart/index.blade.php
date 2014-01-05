@@ -7,7 +7,6 @@
 		<tr>
 			<td class="col-md-6">Name</td>
 			<td class="col-md-1">Quantity</td>
-			<td class="col-md-1">Tax (%)</td>
 			<td class="col-md-1">Price</td>
 			<td class="col-md-2" colspan="2">Total</td>
 		</tr>
@@ -48,7 +47,6 @@
 			<td>
 				<input class="form-control" type="text" name="update[{{{ $item->get('rowId') }}}][quantity]" value="{{{ $item->get('quantity') }}}" />
 			</td>
-			<td>{{ $item->taxTotal() }}%</td>
 			<td>{{{ Converter::value($item->get('price'))->from('currency.eur')->to('currency.usd')->format() }}}</td>
 			<td>
 				{{{ Converter::value($item->subTotal())->from('currency.eur')->to('currency.usd')->format() }}}
@@ -60,7 +58,7 @@
 		@endforeach
 		<tr>
 			<td colspan="4">
-				<span class="pull-right">Products in the Bag</span>
+				<span class="pull-right">Items</span>
 			</td>
 			<td colspan="2">{{{ Cart::quantity() }}}</td>
 		</tr>
@@ -90,7 +88,7 @@
 			<td colspan="4">
 				<span class="pull-right">{{ $rate->get('name') }}</span>
 			</td>
-			<td colspan="2">{{ $rate->get('result') }}</td>
+			<td colspan="2">{{ Converter::value($rate->get('result'))->from('currency.usd')->to('currency.eur')->format() }}</td>
 		</tr>
 		@endforeach
 
