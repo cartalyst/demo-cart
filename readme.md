@@ -1,21 +1,25 @@
-## Laravel PHP Framework
+# Cart Demo
 
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/version.png)](https://packagist.org/packages/laravel/framework) [![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.png)](https://packagist.org/packages/laravel/framework) [![Build Status](https://travis-ci.org/laravel/framework.png)](https://travis-ci.org/laravel/framework)
+This is a basic demo showing some of the functionality of the Cart package.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, and caching.
+## Installation
 
-Laravel aims to make the development process a pleasing one for the developer without sacrificing application functionality. Happy developers make the best code. To this end, we've attempted to combine the very best of what we have seen in other web frameworks, including frameworks implemented in other languages, such as Ruby on Rails, ASP.NET MVC, and Sinatra.
+To install this demo, firstly you must be a subscriber of Cartalyst's [Arsenal](http://cartalyst.com/arsenal).
 
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+Installation:
 
-## Official Documentation
+1. Clone this repo:
 
-Documentation for the entire framework can be found on the [Laravel website](http://laravel.com/docs).
+        git clone git@github.com:cartalyst/demo-cart.git
 
-### Contributing To Laravel
+2. Setup your virtual host.
 
-**All issues and pull requests should be filed on the [laravel/framework](http://github.com/laravel/framework) repository.**
+3. Go into the directory in your terminal app and install composer dependencies:
 
-### License
+        composer install
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+4. Configure your database connection by opening `app/config/database.php` file.
+
+5. Run the migrations and the seeds
+
+        php artisan migrate --seed
