@@ -15,29 +15,15 @@ Route::get('/', 'HomeController@index');
 
 Route::get('cart', 'CartController@index');
 Route::post('cart', 'CartController@update');
-Route::get('cart/{id}/remove', 'CartController@delete');
-Route::get('cart/clear', 'CartController@clear');
-
-Route::get('product/{id}', 'HomeController@product');
 Route::get('cart/{id}/add', 'CartController@add');
+Route::get('cart/{id}/remove', 'CartController@delete');
+Route::get('cart/destroy', 'CartController@destroy');
 
-Route::get('cart/remove/{id}', function($id)
-{
-	Cart::remove($id);
+Route::get('wishlist', 'WishlistController@index');
+Route::post('wishlist', 'WishlistController@update');
+Route::get('wishlist/{id}/add', 'WishlistController@add');
+Route::get('wishlist/{id}/remove', 'WishlistController@delete');
+Route::get('wishlist/destroy', 'WishlistController@destroy');
 
-	return Redirect::to('cart');
-});
 
-Route::get('cart/destroy', function()
-{
-	Cart::destroy();
 
-	return Redirect::to('cart');
-});
-
-Route::post('cart', function()
-{
-	Cart::update(Input::get('update'));
-
-	return Redirect::to('cart');
-});

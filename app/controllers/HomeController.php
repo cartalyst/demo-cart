@@ -11,9 +11,4 @@ class HomeController extends BaseController {
 		return View::make('cart.products', compact('cart', 'products'));
 	}
 
-	public function product($id)
-	{
-
-	}
-
 }

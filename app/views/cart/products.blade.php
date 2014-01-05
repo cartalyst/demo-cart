@@ -23,7 +23,7 @@
 							@if ($cart->find(array('id' => $product->slug), 'wishlist'))
 							<a><i class="glyphicon glyphicon-star"></i></a>
 							@else
-							<a class="btn btn-xs" href="{{ URL::to("product/add/{$product->slug}/wishlist") }}"><i class="glyphicon glyphicon-star-empty"></i></a>
+							<a class="btn btn-xs" href="{{ URL::to("wishlist/{$product->slug}/add") }}"><i class="glyphicon glyphicon-star-empty"></i></a>
 							@endif
 						</span>
 					</p>

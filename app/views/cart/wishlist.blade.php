@@ -52,7 +52,7 @@
 				{{{ Converter::value($item->subTotal())->from('currency.eur')->to('currency.usd')->format() }}}
 			</td>
 			<td>
-				<a class="btn btn-danger btn-xs" href="{{ URL::to("cart/remove/{$item->get('rowId')}") }}">Delete</a>
+				<a class="btn btn-danger btn-xs" href="{{ URL::to("wishlist/{$item->get('rowId')}/remove") }}">Delete</a>
 			</td>
 		</tr>
 		@endforeach
@@ -117,7 +117,7 @@
 
 @if ( ! $items->isEmpty())
 <button type="submit" class="btn btn-info">Update</button>
-<a href="{{ URL::to('cart/destroy') }}" class="btn btn-danger">Empty Cart</a>
+<a href="{{ URL::to('wishlist/destroy') }}" class="btn btn-danger">Empty Cart</a>
 <div class="pull-right">
 	<a href="#" class="btn btn-warning">Checkout</a>
 </div>

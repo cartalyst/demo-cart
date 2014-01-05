@@ -12,7 +12,7 @@ class CartController extends BaseController {
 
 		$total = $cart->total();
 
-		return View::make('cart.index', compact('cart', 'items', 'total'));
+		return View::make('cart.cart', compact('cart', 'items', 'total'));
 	}
 
 	public function add($id)
@@ -48,7 +48,28 @@ class CartController extends BaseController {
 			'conditions' => array($condition1, $condition2),
 		);
 
-		$cart = Cart::add($data);
+		Cart::instance('main')->add($data);
+
+		return Redirect::to('cart');
+	}
+
+	public function update()
+	{
+		Cart::update(Input::get('update'));
+
+		return Redirect::to('cart');
+	}
+
+	public function delete($id)
+	{
+		Cart::instance('main')->remove($id);
+
+		return Redirect::to('cart');
+	}
+
+	public function destroy()
+	{
+		Cart::instance('main')->destroy();
 
 		return Redirect::to('cart');
 	}
