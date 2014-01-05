@@ -19,14 +19,25 @@ class CartController extends BaseController {
 	{
 		$product = Product::where('slug', $id)->first();
 
-		$condition = new Condition(array(
+		$condition1 = new Condition(array(
 			'name'   => 'VAT (17.5%)',
 			'type'   => 'tax',
 			'target' => 'subtotal',
 		));
 
-		$condition->setActions(array(
-			'value' => '17.50%',
+		$condition1->setActions(array(
+			array('value' => '17.50%'),
+			array('value' => '5%'),
+		));
+
+		$condition2 = new Condition(array(
+			'name'   => 'VAT (23%)',
+			'type'   => 'tax',
+			'target' => 'subtotal',
+		));
+
+		$condition2->setActions(array(
+			'value' => '23%',
 		));
 
 		$data = array(
@@ -34,7 +45,7 @@ class CartController extends BaseController {
 			'name'       => $product->name,
 			'price'      => $product->price,
 			'quantity'   => 1,
-			'conditions' => $condition,
+			'conditions' => array($condition1, $condition2),
 		);
 
 		$cart = Cart::add($data);

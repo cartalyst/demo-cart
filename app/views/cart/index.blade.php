@@ -7,7 +7,7 @@
 		<tr>
 			<td class="col-md-6">Name</td>
 			<td class="col-md-1">Quantity</td>
-			<td class="col-md-1">Tax</td>
+			<td class="col-md-1">Tax (%)</td>
 			<td class="col-md-1">Price</td>
 			<td class="col-md-2" colspan="2">Total</td>
 		</tr>
@@ -48,7 +48,7 @@
 			<td>
 				<input class="form-control" type="text" name="update[{{{ $item->get('rowId') }}}][quantity]" value="{{{ $item->get('quantity') }}}" />
 			</td>
-			<td>{{ $item->getTax() }}%</td>
+			<td>{{ $item->taxTotal() }}%</td>
 			<td>{{{ Converter::value($item->get('price'))->from('currency.eur')->to('currency.usd')->format() }}}</td>
 			<td>
 				{{{ Converter::value($item->subTotal())->from('currency.eur')->to('currency.usd')->format() }}}
@@ -79,7 +79,7 @@
 			<td colspan="4">
 				<span class="pull-right">{{ $condition->get('name') }}</span>
 			</td>
-			<td colspan="2">{{-- Currency::value($cart->discountValue($condition))->to('usd')->format() --}}</td>
+			<td colspan="2">{{-- Converter::value($cart->discountValue($condition))->to('currency.usd')->format() --}}</td>
 		</tr>
 		@endif
 		@endforeach
@@ -98,20 +98,20 @@
 			<td colspan="4">
 				<span class="pull-right">Cart Weight</span>
 			</td>
-			<td colspan="2">{{{-- $cart->weight->value($cart->weight())->convert('g', 'kg')->format('kg') --}}}</td>
+			<td colspan="2">{{{ Converter::value($cart->weight())->from('weight.g')->to('weight.kg')->format() }}}</td>
 		</tr>
 
 		<tr>
 			<td colspan="4">
 				<span class="pull-right">Total Usd</span>
 			</td>
-			<td colspan="2">{{{-- Currency::value($total)->to('usd')->format() --}}}</td>
+			<td colspan="2">{{{ Converter::value($total)->to('currency.usd')->format() }}}</td>
 		</tr>
 		<tr>
 			<td colspan="4">
 				<span class="pull-right">Total Eur</span>
 			</td>
-			<td colspan="2">{{{-- Currency::value($total)->from('usd')->to('eur')->convert()->format() --}}}</td>
+			<td colspan="2">{{{ Converter::value($total)->from('currency.usd')->to('currency.eur')->convert()->format() }}}</td>
 		</tr>
 		@endif
 	</tbody>

@@ -27,3 +27,17 @@ Route::get('cart/remove/{id}', function($id)
 
 	return Redirect::to('cart');
 });
+
+Route::get('cart/destroy', function()
+{
+	Cart::destroy();
+
+	return Redirect::to('cart');
+});
+
+Route::post('cart', function()
+{
+	Cart::update(Input::get('update'));
+
+	return Redirect::to('cart');
+});
