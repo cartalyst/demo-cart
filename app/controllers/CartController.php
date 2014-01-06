@@ -69,7 +69,7 @@ class CartController extends BaseController {
 
 	public function destroy()
 	{
-		Cart::instance('main')->destroy();
+		Cart::instance('main')->clear();
 
 		return Redirect::to('cart');
 	}
