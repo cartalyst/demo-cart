@@ -45,5 +45,8 @@
 
 		<script src="//code.jquery.com/jquery.js"></script>
 		<script src="assets/js/bootstrap.min.js"></script>
+		<script type="text/javascript">
+		$('.tip').tooltip();
+		</script>
 	</body>
 </html>
