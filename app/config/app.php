@@ -107,6 +107,7 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
+		'Cartalyst\Sentry\Laravel\SentryServiceProvider',
 		'Cartalyst\Cart\Laravel\CartServiceProvider',
 		'Cartalyst\Converter\Laravel\ConverterServiceProvider',
 
@@ -176,6 +177,7 @@ return array(
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
 
+		'Sentry'    => 'Cartalyst\Sentry\Laravel\Facades\Sentry',
 		'Cart'      => 'Cartalyst\Cart\Laravel\Facades\Cart',
 		'Converter' => 'Cartalyst\Converter\Laravel\Facades\Converter',
 
