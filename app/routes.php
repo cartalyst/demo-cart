@@ -38,13 +38,6 @@ Route::get('login', function()
 	return View::make('cart.login');
 });
 
-Route::get('logout', function()
-{
-	Sentry::logout();
-
-	return Redirect::to('/');
-});
-
 Route::post('login', function()
 {
 	if (Sentry::authenticate(Input::all()))
@@ -53,4 +46,11 @@ Route::post('login', function()
 	}
 
 	return Redirect::to('login');
+});
+
+Route::get('logout', function()
+{
+	Sentry::logout();
+
+	return Redirect::to('/');
 });
