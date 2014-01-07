@@ -10,21 +10,29 @@ Installation:
 
 1. Clone this repo:
 
-	git clone git@github.com:cartalyst/demo-cart.git
+```
+git clone git@github.com:cartalyst/demo-cart.git
+```
 
 2. Setup your virtual host.
 
 3. Go into the directory in your terminal app and install composer dependencies:
 
-	composer install
+```
+composer install
+```
 
 4. Configure your database connection by opening `app/config/database.php` file.
 
 5. Run the migrations
 
-	php artisan migrate
-	php artisan migrate --package="cartalyst/sentry"
+```
+php artisan migrate
+php artisan migrate --package="cartalyst/sentry"
+```
 
 6. Seed the database
 
-	php artisan db:seed
+````
+php artisan db:seed
+```
