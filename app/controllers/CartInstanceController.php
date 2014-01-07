@@ -1,10 +1,17 @@
 <?php
 
-class WishlistController extends BaseController {
+class CartInstanceController extends BaseController {
+
+	protected $instance;
+
+	public function __construct()
+	{
+		$this->instance = Request::segment(1);
+	}
 
 	public function index()
 	{
-		$cart = Cart::instance('wishlist');
+		$cart = Cart::instance($this->instance);
 
 		$items = $cart->items();
 
@@ -24,23 +31,23 @@ class WishlistController extends BaseController {
 			'quantity' => 1,
 		);
 
-		Cart::instance('wishlist')->add($data);
+		Cart::instance($this->instance)->add($data);
 
-		return Redirect::to('wishlist');
+		return Redirect::to($this->instance);
 	}
 
 	public function delete($id)
 	{
-		Cart::instance('wishlist')->remove($id);
+		Cart::instance($this->instance)->remove($id);
 
-		return Redirect::to('wishlist');
+		return Redirect::to($this->instance);
 	}
 
 	public function destroy()
 	{
-		Cart::instance('wishlist')->destroy();
+		Cart::instance($this->instance)->destroy();
 
-		return Redirect::to('wishlist');
+		return Redirect::to($this->instance);
 	}
 
 }

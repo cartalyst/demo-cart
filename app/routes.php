@@ -19,10 +19,38 @@ Route::get('cart/{id}/add', 'CartController@add');
 Route::get('cart/{id}/remove', 'CartController@delete');
 Route::get('cart/destroy', 'CartController@destroy');
 
-Route::get('wishlist', 'WishlistController@index');
-Route::get('wishlist/{id}/add', 'WishlistController@add');
-Route::get('wishlist/{id}/remove', 'WishlistController@delete');
-Route::get('wishlist/destroy', 'WishlistController@destroy');
+$instances = Cart::instances();
 
+array_forget($instances, 'main');
 
+View::share('instances', $instances);
 
+foreach ($instances as $instance => $col)
+{
+	Route::get("{$instance}", 'CartInstanceController@index');
+	Route::get("{$instance}/{id}/add", 'CartInstanceController@add');
+	Route::get("{$instance}/{id}/remove", 'CartInstanceController@delete');
+	Route::get("{$instance}/destroy", 'CartInstanceController@destroy');
+}
+
+Route::get('login', function()
+{
+	return View::make('cart.login');
+});
+
+Route::get('logout', function()
+{
+	Sentry::logout();
+
+	return Redirect::to('/');
+});
+
+Route::post('login', function()
+{
+	if (Sentry::authenticate(Input::all()))
+	{
+		return Redirect::to('/');
+	}
+
+	return Redirect::to('login');
+});

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 	<html>
 	<head>
-		<title>Cart</title>
+		<title>Cart Demo</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link href="assets/css/bootstrap.min.css" rel="stylesheet" media="screen">
 
@@ -35,7 +35,17 @@
 					<ul class="nav navbar-nav">
 						<li{{ Request::is('/') ? ' class="active"' : null }}><a href="{{ URL::to('/') }}">Products</a></li>
 						<li{{ Request::is('cart') ? ' class="active"' : null }}><a href="{{ URL::to('cart') }}">Cart</a></li>
-						<li{{ Request::is('wishlist') ? ' class="active"' : null }}><a href="{{ URL::to('wishlist') }}">Wishlist</a></li>
+						@foreach ($instances as $instance => $col)
+						<li{{ Request::is($instance) ? ' class="active"' : null }}><a href="{{ URL::to($instance) }}">{{ $instance }}</a></li>
+						@endforeach
+					</ul>
+
+					<ul class="nav navbar-nav navbar-right">
+						@if (Sentry::check())
+						<li><a href="{{ URL::to('logout') }}">Logout</a></li>
+						@else
+						<li{{ Request::is('login') ? ' class="active"' : null }}><a href="{{ URL::to('login') }}">Login</a></li>
+						@endif
 					</ul>
 				</div>
 			</nav>
