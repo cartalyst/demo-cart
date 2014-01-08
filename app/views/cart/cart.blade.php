@@ -69,17 +69,34 @@
 			<td colspan="2">{{{ Converter::value($cart->subtotal())->from('currency.eur')->to('currency.usd')->format() }}}</td>
 		</tr>
 
+		{{-- Items Discounts --}}
+		@foreach ($cart->sumConditions('discount') as $name => $value)
+		<tr>
+			<td colspan="5">
+				<span class="pull-right">{{ $name }}</span>
+			</td>
+			<td colspan="2">{{ Converter::value($value)->to('currency.usd')->format() }}</td>
+		</tr>
+		@endforeach
+
+		{{-- Items Taxes --}}
+		@foreach ($cart->sumConditions('tax') as $name => $value)
+		<tr>
+			<td colspan="4">
+				<span class="pull-right">{{ $name }}</span>
+			</td>
+			<td colspan="2">{{ Converter::value($value)->to('currency.usd')->format() }}</td>
+		</tr>
+		@endforeach
+
 		{{-- Discounts --}}
 		@foreach ($cart->discounts() as $condition)
-		{{-- Only show the condition if it's valid --}}
-		@if ($condition->get('valid'))
 		<tr>
 			<td colspan="4">
 				<span class="pull-right">{{ $condition->get('name') }}</span>
 			</td>
-			<td colspan="2">{{-- Converter::value($cart->discountValue($condition))->to('currency.usd')->format() --}}</td>
+			<td colspan="2">{{ Converter::value($condition->result())->to('currency.usd')->format() }}</td>
 		</tr>
-		@endif
 		@endforeach
 
 		{{-- Taxes --}}
@@ -88,7 +105,7 @@
 			<td colspan="4">
 				<span class="pull-right">{{ $rate->get('name') }}</span>
 			</td>
-			<td colspan="2">{{ Converter::value($rate->get('result'))->from('currency.usd')->to('currency.eur')->format() }}</td>
+			<td colspan="2">{{ Converter::value($rate->result())->from('currency.usd')->to('currency.eur')->format() }}</td>
 		</tr>
 		@endforeach
 

@@ -8,6 +8,28 @@ class CartController extends BaseController {
 	{
 		$cart = Cart::instance('main');
 
+		$condition1 = new Condition(array(
+			'name'   => 'Global Tax (12.5%)',
+			'type'   => 'tax',
+			'target' => 'subtotal',
+		));
+
+		$condition1->setActions(array(
+			array('value' => '12.50%'),
+		));
+
+		$condition2 = new Condition(array(
+			'name'   => 'Global Discount (5%)',
+			'type'   => 'discount',
+			'target' => 'subtotal',
+		));
+
+		$condition2->setActions(array(
+			array('value' => '-5%'),
+		));
+
+		$cart->condition(array($condition1, $condition2));
+
 		$items = $cart->items();
 
 		$total = $cart->total();
@@ -27,7 +49,6 @@ class CartController extends BaseController {
 
 		$condition1->setActions(array(
 			array('value' => '17.50%'),
-			array('value' => '5%'),
 		));
 
 		$condition2 = new Condition(array(
