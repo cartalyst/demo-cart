@@ -49,7 +49,7 @@
 			</td>
 			<td>{{{ Converter::value($item->get('price'))->from('currency.eur')->to('currency.usd')->format() }}}</td>
 			<td>
-				{{{ Converter::value($item->subTotal())->from('currency.eur')->to('currency.usd')->format() }}}
+				{{{ Converter::value($item->total())->from('currency.eur')->to('currency.usd')->format() }}}
 			</td>
 			<td>
 				<a class="btn btn-danger btn-xs" href="{{ URL::to("cart/{$item->get('rowId')}/remove") }}">Delete</a>
@@ -70,7 +70,7 @@
 		</tr>
 
 		{{-- Items Discounts --}}
-		@foreach ($cart->sumConditions('discount') as $name => $value)
+		@foreach ($cart->getItemsConditionsTotal('discount') as $name => $value)
 		<tr>
 			<td colspan="5">
 				<span class="pull-right">{{ $name }}</span>
@@ -80,7 +80,7 @@
 		@endforeach
 
 		{{-- Items Taxes --}}
-		@foreach ($cart->sumConditions('tax') as $name => $value)
+		@foreach ($cart->getItemsConditionsTotal('tax') as $name => $value)
 		<tr>
 			<td colspan="4">
 				<span class="pull-right">{{ $name }}</span>
@@ -89,23 +89,23 @@
 		</tr>
 		@endforeach
 
-		{{-- Discounts --}}
-		@foreach ($cart->discounts() as $condition)
+		{{-- Cart Discounts --}}
+		@foreach ($cart->getConditionsTotal('discount', false) as $name => $value)
 		<tr>
 			<td colspan="4">
-				<span class="pull-right">{{ $condition->get('name') }}</span>
+				<span class="pull-right">{{ $name }}</span>
 			</td>
-			<td colspan="2">{{ Converter::value($condition->result())->to('currency.usd')->format() }}</td>
+			<td colspan="2">{{ Converter::value($value)->to('currency.usd')->format() }}</td>
 		</tr>
 		@endforeach
 
-		{{-- Taxes --}}
-		@foreach ($cart->taxes() as $rate)
+		{{-- Cart Taxes --}}
+		@foreach ($cart->getConditionsTotal('tax', false) as $name => $value)
 		<tr>
 			<td colspan="4">
-				<span class="pull-right">{{ $rate->get('name') }}</span>
+				<span class="pull-right">{{ $name }}</span>
 			</td>
-			<td colspan="2">{{ Converter::value($rate->result())->from('currency.usd')->to('currency.eur')->format() }}</td>
+			<td colspan="2">{{ Converter::value($value)->to('currency.usd')->format() }}</td>
 		</tr>
 		@endforeach
 
