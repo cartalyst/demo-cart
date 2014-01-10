@@ -35,9 +35,7 @@
 					<ul class="nav navbar-nav">
 						<li{{ Request::is('/') ? ' class="active"' : null }}><a href="{{ URL::to('/') }}">Products</a></li>
 						<li{{ Request::is('cart') ? ' class="active"' : null }}><a href="{{ URL::to('cart') }}">Cart</a></li>
-						@foreach ($instances as $instance => $col)
-						<li{{ Request::is($instance) ? ' class="active"' : null }}><a href="{{ URL::to($instance) }}">{{ $instance }}</a></li>
-						@endforeach
+						<li{{ Request::is('wishlist') ? ' class="active"' : null }}><a href="{{ URL::to('wishlist') }}">Wishlist</a></li>
 					</ul>
 
 					<ul class="nav navbar-nav navbar-right">

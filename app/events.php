@@ -6,7 +6,10 @@ if (Sentry::check())
 
 	Event::listen('cart.instance.created', function($instance)
 	{
-		Sentry::getUser()->cart()->create(compact('instance'));
+		if ( ! Sentry::getUser()->cart()->where('instance', $instance)->first())
+		{
+			Sentry::getUser()->cart()->create(compact('instance'));
+		}
 	});
 
 	Event::listen('cart.instance.removed', function($instance)
