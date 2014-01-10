@@ -51,7 +51,7 @@ if (Sentry::check())
 
 	Event::listen('cart.cleared', function($instance)
 	{
-		Sentry::getUser()->cart()->where('instance', $instance)->delete();
+		Sentry::getUser()->cart()->where('instance', $instance)->first()->items()->delete();
 	});
 
 }
