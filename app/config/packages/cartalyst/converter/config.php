@@ -67,6 +67,7 @@ return array(
 
 			'usd' => array(
 				'format' => '$1,0.00',
+				'negative' => '($1,0.00) neg',
 			),
 
 			'eur' => array(
