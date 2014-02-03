@@ -5,6 +5,15 @@ use Cartalyst\Cart\Storage\Sessions\IlluminateSession;
 
 $app = app();
 
+/*
+|--------------------------------------------------------------------------
+| Wishlist Binding
+|--------------------------------------------------------------------------
+|
+| We'll bind our wishlist into the container.
+|
+*/
+
 $app['wishlist'] = $app->share(function($app)
 {
 	$config = $app['config']->get('cartalyst/cart::config');
