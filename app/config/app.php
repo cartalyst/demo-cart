@@ -111,6 +111,8 @@ return array(
 		'Cartalyst\Cart\Laravel\CartServiceProvider',
 		'Cartalyst\Converter\Laravel\ConverterServiceProvider',
 
+		'WishlistServiceProvider',
+
 	),
 
 	/*
@@ -180,6 +182,8 @@ return array(
 		'Sentry'    => 'Cartalyst\Sentry\Laravel\Facades\Sentry',
 		'Cart'      => 'Cartalyst\Cart\Laravel\Facades\Cart',
 		'Converter' => 'Cartalyst\Converter\Laravel\Facades\Converter',
+
+		'Wishlist'  => 'Cart\Facades\Wishlist',
 
 	),
 

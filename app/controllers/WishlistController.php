@@ -4,7 +4,7 @@ class WishlistController extends BaseController {
 
 	public function index()
 	{
-		$cart = Cart::instance('wishlist');
+		$cart = app('wishlist');
 
 		$items = $cart->items();
 
@@ -24,21 +24,31 @@ class WishlistController extends BaseController {
 			'quantity' => 1,
 		);
 
-		Cart::instance('wishlist')->add($data);
+		app('wishlist')->add($data);
 
-		return Redirect::to('wishlist');
+		return Redirect::back();
 	}
 
 	public function delete($id)
 	{
-		Cart::instance('wishlist')->remove($id);
+		$product = Product::where('slug', $id)->first();
 
-		return Redirect::to('wishlist');
+		$data = array(
+			'id'       => $product->slug,
+			'name'     => $product->name,
+			'quantity' => 1,
+		);
+
+		$rowId = head(app('wishlist')->find($data))->get('rowId');
+
+		app('wishlist')->remove($rowId);
+
+		return Redirect::back();
 	}
 
 	public function destroy()
 	{
-		Cart::instance('wishlist')->clear();
+		app('wishlist')->clear();
 
 		return Redirect::to('wishlist');
 	}

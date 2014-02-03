@@ -20,10 +20,10 @@
 						{{-- Add to wishlist button --}}
 						<span class="pull-right">
 							{{-- Check if the product is on the wishlist already --}}
-							@if ($cart->find(array('id' => $product->slug), 'wishlist'))
-							<a><i class="glyphicon glyphicon-star"></i></a>
+							@if ($wishlist->find(array('id' => $product->slug)))
+								<a class="btn btn-xs tip" href="{{ URL::to("wishlist/{$product->slug}/remove") }}" title="Remove from Wishlist"><i class="glyphicon glyphicon-star"></i></a>
 							@else
-							<a class="btn btn-xs tip" href="{{ URL::to("wishlist/{$product->slug}/add") }}" title="Add to Wishlist"><i class="glyphicon glyphicon-star-empty"></i></a>
+								<a class="btn btn-xs tip" href="{{ URL::to("wishlist/{$product->slug}/add") }}" title="Add to Wishlist"><i class="glyphicon glyphicon-star-empty"></i></a>
 							@endif
 						</span>
 					</p>
