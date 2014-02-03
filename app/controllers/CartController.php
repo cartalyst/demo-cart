@@ -49,12 +49,22 @@ class CartController extends BaseController {
 			array('value' => '-7.5%'),
 		));
 
+		$shippingCondition = new Condition(array(
+			'name'   => 'Item Based Shipping',
+			'type'   => 'shipping',
+			'target' => 'subtotal',
+		));
+
+		$shippingCondition->setActions(array(
+			array('value' => '20.00'),
+		));
+
 		$data = array(
 			'id'         => $product->slug,
 			'name'       => $product->name,
 			'price'      => $product->price,
 			'quantity'   => 1,
-			'conditions' => array($condition1, $condition2, $condition3),
+			'conditions' => array($condition1, $condition2, $condition3, $shippingCondition),
 		);
 
 		Cart::add($data);
@@ -80,7 +90,7 @@ class CartController extends BaseController {
 		));
 
 		$shippingCondition = new Condition(array(
-			'name'   => 'Shipping',
+			'name'   => 'Global Shipping',
 			'type'   => 'shipping',
 			'target' => 'subtotal',
 		));
@@ -92,6 +102,13 @@ class CartController extends BaseController {
 		Cart::condition(array($condition1, $condition2, $shippingCondition));
 
 		Cart::setConditionsOrder(array(
+			'discount',
+			'other',
+			'tax',
+			'shipping',
+		));
+
+		Cart::setItemsConditionsOrder(array(
 			'discount',
 			'other',
 			'tax',

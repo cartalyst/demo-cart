@@ -95,6 +95,16 @@
 		</tr>
 		@endforeach
 
+		{{-- Items Shipping --}}
+		@foreach ($cart->itemsConditionsTotal('shipping') as $name => $value)
+		<tr>
+			<td colspan="4">
+				<span class="pull-right">{{ $name }}</span>
+			</td>
+			<td colspan="2">{{ Converter::value($value)->to('currency.usd')->format() }}</td>
+		</tr>
+		@endforeach
+
 		{{-- Cart Discounts --}}
 		@foreach ($cart->conditionsTotal('discount', false) as $name => $value)
 		<tr>
