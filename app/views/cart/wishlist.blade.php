@@ -28,7 +28,7 @@
 				{{{ Converter::value($item->subTotal())->from('currency.eur')->to('currency.usd')->format() }}}
 			</td>
 			<td>
-				<a class="btn btn-danger btn-xs" href="{{ URL::to("wishlist/{$item->get('rowId')}/remove") }}">Delete</a>
+				<a class="btn btn-danger btn-xs" href="{{ URL::to("wishlist/{$item->get('id')}/remove") }}">Delete</a>
 			</td>
 		</tr>
 		@endforeach
