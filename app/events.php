@@ -4,20 +4,7 @@
 if (Sentry::check())
 {
 
-	Event::listen('cart.instance.created', function($instance)
-	{
-		if ( ! Sentry::getUser()->cart()->where('instance', $instance)->first())
-		{
-			Sentry::getUser()->cart()->create(compact('instance'));
-		}
-	});
-
-	Event::listen('cart.instance.removed', function($instance)
-	{
-		Sentry::getUser()->cart()->where('instance', $instance)->delete();
-	});
-
-	Event::listen('cart.added', function($item, $instance)
+	Event::listen('cartalyst.cart.added', function($item, $instance)
 	{
 		$product = Product::where('slug', $item->get('id'))->first();
 
@@ -32,7 +19,7 @@ if (Sentry::check())
 		));
 	});
 
-	Event::listen('cart.updated', function($item, $instance)
+	Event::listen('cartalyst.cart.updated', function($item, $instance)
 	{
 		$product = Product::where('slug', $item->get('id'))->first();
 
@@ -43,7 +30,7 @@ if (Sentry::check())
 		));
 	});
 
-	Event::listen('cart.removed', function($item, $instance)
+	Event::listen('cartalyst.cart.removed', function($item, $instance)
 	{
 		$product = Product::where('slug', $item->get('id'))->first();
 
@@ -52,7 +39,7 @@ if (Sentry::check())
 		$cart->items()->where('product_id', $product->id)->delete();
 	});
 
-	Event::listen('cart.cleared', function($instance)
+	Event::listen('cartalyst.cart.cleared', function($instance)
 	{
 		Sentry::getUser()->cart()->where('instance', $instance)->first()->items()->delete();
 	});
