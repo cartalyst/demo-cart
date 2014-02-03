@@ -4,7 +4,7 @@ class HomeController extends BaseController {
 
 	public function index()
 	{
-		$cart = Cart::instance('main');
+		$cart = app('cart');
 
 		$products = Product::paginate(20);
 

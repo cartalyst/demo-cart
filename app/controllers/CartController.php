@@ -6,29 +6,7 @@ class CartController extends BaseController {
 
 	public function index()
 	{
-		$cart = Cart::instance('main');
-
-		$condition1 = new Condition(array(
-			'name'   => 'Global Tax (12.5%)',
-			'type'   => 'tax',
-			'target' => 'subtotal',
-		));
-
-		$condition1->setActions(array(
-			array('value' => '12.50%'),
-		));
-
-		$condition2 = new Condition(array(
-			'name'   => 'Global Discount (5%)',
-			'type'   => 'discount',
-			'target' => 'subtotal',
-		));
-
-		$condition2->setActions(array(
-			array('value' => '-5%'),
-		));
-
-		$cart->condition(array($condition1, $condition2));
+		$cart = app('cart');
 
 		$items = $cart->items();
 
@@ -58,7 +36,17 @@ class CartController extends BaseController {
 		));
 
 		$condition2->setActions(array(
-			'value' => '23%',
+			array('value' => '23%'),
+		));
+
+		$condition3 = new Condition(array(
+			'name'   => 'Discount (7.5%)',
+			'type'   => 'discount',
+			'target' => 'subtotal',
+		));
+
+		$condition3->setActions(array(
+			array('value' => '-7.5%'),
 		));
 
 		$data = array(
@@ -66,10 +54,49 @@ class CartController extends BaseController {
 			'name'       => $product->name,
 			'price'      => $product->price,
 			'quantity'   => 1,
-			'conditions' => array($condition1, $condition2),
+			'conditions' => array($condition1, $condition2, $condition3),
 		);
 
-		Cart::instance('main')->add($data);
+		Cart::add($data);
+
+		$condition1 = new Condition(array(
+			'name'   => 'Global Tax (12.5%)',
+			'type'   => 'tax',
+			'target' => 'subtotal',
+		));
+
+		$condition1->setActions(array(
+			array('value' => '12.50%'),
+		));
+
+		$condition2 = new Condition(array(
+			'name'   => 'Global Discount (5%)',
+			'type'   => 'discount',
+			'target' => 'subtotal',
+		));
+
+		$condition2->setActions(array(
+			array('value' => '-5%'),
+		));
+
+		$shippingCondition = new Condition(array(
+			'name'   => 'Shipping',
+			'type'   => 'shipping',
+			'target' => 'subtotal',
+		));
+
+		$shippingCondition->setActions(array(
+			array('value' => '20.00'),
+		));
+
+		Cart::condition(array($condition1, $condition2, $shippingCondition));
+
+		Cart::setConditionsOrder(array(
+			'discount',
+			'other',
+			'tax',
+			'shipping',
+		));
 
 		return Redirect::to('cart');
 	}
@@ -83,14 +110,14 @@ class CartController extends BaseController {
 
 	public function delete($id)
 	{
-		Cart::instance('main')->remove($id);
+		Cart::remove($id);
 
 		return Redirect::to('cart');
 	}
 
 	public function destroy()
 	{
-		Cart::instance('main')->clear();
+		Cart::clear();
 
 		return Redirect::to('cart');
 	}
