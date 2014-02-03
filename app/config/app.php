@@ -111,8 +111,6 @@ return array(
 		'Cartalyst\Cart\Laravel\CartServiceProvider',
 		'Cartalyst\Converter\Laravel\ConverterServiceProvider',
 
-		'WishlistServiceProvider',
-
 	),
 
 	/*
