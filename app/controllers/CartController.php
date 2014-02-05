@@ -10,9 +10,23 @@ class CartController extends BaseController {
 
 		$items = $cart->items();
 
+		$cart->clearConditions('tax');
+
 		$total = $cart->total();
 
-		return View::make('cart.cart', compact('cart', 'items', 'total'));
+		$conditions = $cart->conditions();
+
+		$coupon = false;
+
+		foreach ($cart->conditions() as $condition)
+		{
+			if ($condition->get('name') === 'Limited Time Offer (10% Off)')
+			{
+				$coupon = true;
+			}
+		}
+
+		return View::make('cart.cart', compact('cart', 'items', 'total', 'coupon'));
 	}
 
 	public function add($id)
@@ -106,6 +120,7 @@ class CartController extends BaseController {
 			'other',
 			'tax',
 			'shipping',
+			'coupon',
 		));
 
 		Cart::setItemsConditionsOrder(array(
@@ -137,6 +152,34 @@ class CartController extends BaseController {
 		Cart::clear();
 
 		return Redirect::to('cart');
+	}
+
+	public function applyCoupon()
+	{
+		$coupon = new Condition(array(
+			'name'   => 'Limited Time Offer (10% Off)',
+			'type'   => 'coupon',
+			'target' => 'subtotal',
+		));
+
+		$coupon->setActions(array(
+			array('value' => '-10.00%'),
+		));
+
+		$cart = app('cart');
+
+		$cart->condition($coupon);
+
+		return Redirect::back();
+	}
+
+	public function removeCoupon()
+	{
+		$cart = app('cart');
+
+		$cart->clearConditions('coupon');
+
+		return Redirect::back();
 	}
 
 }

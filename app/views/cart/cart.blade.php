@@ -125,6 +125,16 @@
 		</tr>
 		@endforeach
 
+		{{-- Cart Coupons --}}
+		@foreach ($cart->conditionsTotal('coupon', false) as $name => $value)
+		<tr class="success">
+			<td colspan="4">
+				<span class="pull-right">{{ $name }}</span>
+			</td>
+			<td colspan="2">{{ Converter::value($value)->to('currency.usd')->format() }}</td>
+		</tr>
+		@endforeach
+
 		{{-- Cart Shipping --}}
 		@foreach ($cart->conditionsTotal('shipping', false) as $name => $value)
 		<tr>
@@ -166,6 +176,37 @@
 </div>
 @endif
 </form>
+
+<br>
+
+@if ( ! $items->isEmpty())
+{{-- Apply Coupons --}}
+@if ($coupon)
+	<div class="row">
+		<a href="/coupon/remove" class="btn">Remove Coupon</a>
+	</div>
+@else
+	{{ Form::open(array('route' => 'applyCoupon')) }}
+
+		<div class="row">
+			<div class="col-md-4">
+				<div class="form-group{{ $errors->first('name', ' has-error') }}">
+					<label for="coupon" class="control-label">Apply Coupon<i class="fa fa-info-circle"></i></label>
+
+					<input type="text" class="form-control" name="coupon" id="coupon" placeholder="Coupon Code" value="" required>
+
+					<span class="help-block">Enter Anything here and click Apply Coupon</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<button class="btn">Apply Coupon</button>
+		</div>
+
+	{{ Form::close() }}
+@endif
+@endif
 
 <br>
 @stop
