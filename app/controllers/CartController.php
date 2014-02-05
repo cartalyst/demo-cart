@@ -10,8 +10,6 @@ class CartController extends BaseController {
 
 		$items = $cart->items();
 
-		$cart->clearConditions('tax');
-
 		$total = $cart->total();
 
 		$conditions = $cart->conditions();
