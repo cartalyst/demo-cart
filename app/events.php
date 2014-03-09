@@ -18,7 +18,7 @@ Event::listen('sentry.authenticated', function($user)
 
 			if (count($search) === 0)
 			{
-				$items[] = array(
+				$items[$cart->instance][] = array(
 					'id'       => $slug,
 					'name'     => $item->product->name,
 					'price'    => $item->product->price,
@@ -28,7 +28,11 @@ Event::listen('sentry.authenticated', function($user)
 		}
 	}
 
-	Cart::sync(new Collection($items));
+	// Sync the main Cart
+	app('cart')->sync(new Collection(array_get($items, 'main', array())));
+
+	// Sync the wishlist
+	app('wishlist')->sync(new Collection(array_get($items, 'wishlist', array())));
 });
 
 # this check can and should be done on each event listener
