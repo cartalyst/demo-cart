@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Product;
 use Cartalyst\Conditions\Condition;
 
 class CartController extends BaseController {

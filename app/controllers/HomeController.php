@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Product;
+
 class HomeController extends BaseController {
 
 	public function index()

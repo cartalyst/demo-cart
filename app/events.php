@@ -1,5 +1,29 @@
 <?php
 
+use App\Models\Cart as CartModel;
+use App\Models\Product;
+use Illuminate\Support\Collection;
+
+Event::listen('sentry.authenticated', function($user)
+{
+	$items = array();
+
+	foreach ($user->cart as $cart)
+	{
+		foreach ($cart->items as $item)
+		{
+			$items[] = array(
+				'id'       => $item->product->slug,
+				'name'     => $item->product->name,
+				'price'    => $item->product->price,
+				'quantity' => 1,
+			);
+		}
+	}
+
+	Cart::sync(new Collection($items));
+});
+
 # this check can and should be done on each event listener
 if (Sentry::check())
 {

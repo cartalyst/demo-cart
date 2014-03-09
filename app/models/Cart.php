@@ -1,8 +1,8 @@
 <?php namespace App\Models;
 
-use Eloquent;
+use Illuminate\Database\Eloquent\Model;
 
-class Cart extends Eloquent {
+class Cart extends Model {
 
 	public function delete()
 	{
