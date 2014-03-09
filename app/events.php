@@ -12,8 +12,17 @@ Event::listen('sentry.authenticated', function($user)
 	{
 		foreach ($cart->items as $item)
 		{
+			$slug = $item->product->slug;
+
+			$search = Cart::find(array('id' => $slug));
+
+			if (count($search) !== 0)
+			{
+				continue;
+			}
+
 			$items[] = array(
-				'id'       => $item->product->slug,
+				'id'       => $slug,
 				'name'     => $item->product->name,
 				'price'    => $item->product->price,
 				'quantity' => 1,
