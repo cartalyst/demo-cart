@@ -16,17 +16,15 @@ Event::listen('sentry.authenticated', function($user)
 
 			$search = Cart::find(array('id' => $slug));
 
-			if (count($search) !== 0)
+			if (count($search) === 0)
 			{
-				continue;
+				$items[] = array(
+					'id'       => $slug,
+					'name'     => $item->product->name,
+					'price'    => $item->product->price,
+					'quantity' => 1,
+				);
 			}
-
-			$items[] = array(
-				'id'       => $slug,
-				'name'     => $item->product->name,
-				'price'    => $item->product->price,
-				'quantity' => 1,
-			);
 		}
 	}
 
