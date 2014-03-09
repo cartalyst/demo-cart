@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Product;
+
 class WishlistController extends BaseController {
 
 	public function index()
