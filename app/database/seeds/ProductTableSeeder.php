@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Product;
+
 class ProductTableSeeder extends Seeder {
 
 	public function run()
