@@ -12,19 +12,39 @@ Event::listen('sentry.authenticated', function($user)
 	{
 		foreach ($cart->items as $item)
 		{
-			$slug = $item->product->slug;
+			$id = $item->product->id;
 
-			$search = Cart::find(array('id' => $slug));
+			$search = Cart::find(array('id' => $id));
 
 			if (count($search) === 0)
 			{
 				$items[$cart->instance][] = array(
-					'id'       => $slug,
+					'id'       => $id,
 					'name'     => $item->product->name,
 					'price'    => $item->product->price,
 					'quantity' => 1,
 				);
 			}
+		}
+	}
+
+	$instance = Cart::getIdentity();
+
+	if ( ! $cart = Sentry::getUser()->cart()->where('instance', $instance)->first())
+	{
+		$cart = Sentry::getUser()->cart()->create(compact('instance'));
+	}
+
+	foreach (Cart::items() as $item)
+	{
+		$id = $item->get('id');
+
+		if ( ! $cart->items()->where('product_id', $id)->first())
+		{
+			$cart->items()->create(array(
+				'product_id' => $id,
+				'quantity'   => $item->get('quantity'),
+			));
 		}
 	}
 
@@ -40,9 +60,10 @@ if (Sentry::check())
 {
 	Event::listen('cartalyst.cart.added', function($item, $cart)
 	{
-		$product = Product::find($item->get('id'));
+		$product  = Product::find($item->get('id'));
+		$instance = $cart->getIdentity();
 
-		if ( ! $cart = Sentry::getUser()->cart()->where('instance', $cart->getIdentity())->first())
+		if ( ! $cart = Sentry::getUser()->cart()->where('instance', $instance)->first())
 		{
 			$cart = Sentry::getUser()->cart()->create(compact('instance'));
 		}
