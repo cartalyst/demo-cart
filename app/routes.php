@@ -25,7 +25,7 @@ Route::get('wishlist/{id}/remove', 'WishlistController@delete');
 Route::get('wishlist/destroy', 'WishlistController@destroy');
 
 Route::post('coupon', array('as' => 'applyCoupon', 'uses' => 'CartController@applyCoupon'));
-Route::get('coupon/remove', 'CartController@removeCoupon');
+Route::get('coupon/remove/{name}', 'CartController@removeCoupon');
 
 Route::get('login', function()
 {

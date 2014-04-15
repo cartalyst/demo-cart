@@ -17,10 +17,10 @@ class WishlistController extends BaseController {
 
 	public function add($id)
 	{
-		$product = Product::where('slug', $id)->first();
+		$product = Product::find($id);
 
 		$data = array(
-			'id'       => $product->slug,
+			'id'       => $product->id,
 			'name'     => $product->name,
 			'price'    => $product->price,
 			'quantity' => 1,
@@ -33,10 +33,10 @@ class WishlistController extends BaseController {
 
 	public function delete($id)
 	{
-		$product = Product::where('slug', $id)->first();
+		$product = Product::find($id);
 
 		$data = array(
-			'id'       => $product->slug,
+			'id'       => $product->id,
 			'name'     => $product->name,
 			'quantity' => 1,
 		);

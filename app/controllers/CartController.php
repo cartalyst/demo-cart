@@ -2,6 +2,7 @@
 
 use App\Models\Product;
 use Cartalyst\Conditions\Condition;
+use Illuminate\Support\SerializableClosure;
 
 class CartController extends BaseController {
 
@@ -30,7 +31,7 @@ class CartController extends BaseController {
 
 	public function add($id)
 	{
-		$product = Product::where('slug', $id)->first();
+		$product = Product::find($id);
 
 		$condition1 = new Condition(array(
 			'name'   => 'VAT (17.5%)',
@@ -73,7 +74,7 @@ class CartController extends BaseController {
 		));
 
 		$data = array(
-			'id'         => $product->slug,
+			'id'         => $product->id,
 			'name'       => $product->name,
 			'price'      => $product->price,
 			'quantity'   => 1,
@@ -155,28 +156,58 @@ class CartController extends BaseController {
 
 	public function applyCoupon()
 	{
-		$coupon = new Condition(array(
-			'name'   => 'Limited Time Offer (10% Off)',
-			'type'   => 'coupon',
-			'target' => 'subtotal',
-		));
-
-		$coupon->setActions(array(
-			array('value' => '-10.00%'),
-		));
+		$coupons = [
+			'PROMO14' => [
+				'data' => [
+					'name'   => "Limited Time 10% Off (code: $code)",
+					'type'   => 'coupon',
+					'target' => 'subtotal',
+				],
+				'actions' => [
+					'value' => '-10%',
+				],
+				'rules' => [],
+			],
+			'DISC2014' => [
+				'data' => [
+					'name'   => "Limited Time $25 Off on all purchases over $200 (code: $code)",
+					'type'   => 'coupon',
+					'target' => 'subtotal',
+				],
+				'actions' => [
+					'value' => '-25',
+				],
+				'rules' => new SerializableClosure(function()
+				{
+					return Cart::subtotal() > 200;
+				}),
+			],
+		];
 
 		$cart = app('cart');
 
-		$cart->condition($coupon);
+		$code = Input::get('coupon');
 
-		return Redirect::back();
+		if ( ! $coupon = array_get($coupons, $code))
+		{
+			return Redirect::back()->withErrors("[$code] is not a valid code.");
+		}
+
+		$couponCondition = new Condition($coupon['data']);
+
+		$couponCondition->setRules($coupon['rules']);
+		$couponCondition->setActions($coupon['actions']);
+
+		$cart->condition($couponCondition);
+
+		return Redirect::back()->withSuccess("Coupon has been applied.");
 	}
 
-	public function removeCoupon()
+	public function removeCoupon($name)
 	{
 		$cart = app('cart');
 
-		$cart->clearConditions('coupon');
+		$cart->removeCondition($name);
 
 		return Redirect::back();
 	}

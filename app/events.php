@@ -38,10 +38,9 @@ Event::listen('sentry.authenticated', function($user)
 # this check can and should be done on each event listener
 if (Sentry::check())
 {
-
 	Event::listen('cartalyst.cart.added', function($item, $cart)
 	{
-		$product = Product::where('slug', $item->get('id'))->first();
+		$product = Product::find($item->get('id'));
 
 		if ( ! $cart = Sentry::getUser()->cart()->where('instance', $cart->getIdentity())->first())
 		{
@@ -56,7 +55,7 @@ if (Sentry::check())
 
 	Event::listen('cartalyst.cart.updated', function($item, $cart)
 	{
-		$product = Product::where('slug', $item->get('id'))->first();
+		$product = Product::find($item->get('id'));
 
 		$cart = Sentry::getUser()->cart()->where('instance', $cart->getIdentity())->first();
 
@@ -67,7 +66,7 @@ if (Sentry::check())
 
 	Event::listen('cartalyst.cart.removed', function($item, $cart)
 	{
-		$product = Product::where('slug', $item->get('id'))->first();
+		$product = Product::find($item->get('id'));
 
 		$cart = Sentry::getUser()->cart()->where('instance', $cart->getIdentity())->first();
 

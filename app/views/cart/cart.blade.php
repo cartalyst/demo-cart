@@ -1,6 +1,9 @@
 @extends('cart.layouts.default')
 
 @section('page')
+
+@include('partials.notifications')
+
 <form role="form" action="" method="post">
 <table class="table table-bordered">
 	<thead>
@@ -72,7 +75,7 @@
 			<td colspan="4">
 				<span class="pull-right">Subtotal (with discounts)</span>
 			</td>
-			<td colspan="2">{{{ Converter::value($cart->applyConditions('discount'))->from('currency.eur')->to('currency.usd')->format() }}}</td>
+			<td colspan="2">{{{ Converter::value($cart->total('discount'))->from('currency.eur')->to('currency.usd')->format() }}}</td>
 		</tr>
 
 		{{-- Items Discounts --}}
@@ -129,6 +132,7 @@
 		@foreach ($cart->conditionsTotal('coupon', false) as $name => $value)
 		<tr class="success">
 			<td colspan="4">
+				<a href="{{ URL::to('coupon/remove', $name) }}" class="pull-left label label-danger"><i class="glyphicon glyphicon-remove"></i></a>
 				<span class="pull-right">{{ $name }}</span>
 			</td>
 			<td colspan="2">{{ Converter::value($value)->to('currency.usd')->format() }}</td>
@@ -195,7 +199,7 @@
 
 					<input type="text" class="form-control" name="coupon" id="coupon" placeholder="Coupon Code" value="" required>
 
-					<span class="help-block">Enter Anything here and click Apply Coupon</span>
+					<span class="help-block">Valid Codes: PROMO14, DISC2014</span>
 				</div>
 			</div>
 		</div>
