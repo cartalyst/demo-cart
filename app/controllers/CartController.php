@@ -156,6 +156,10 @@ class CartController extends BaseController {
 
 	public function applyCoupon()
 	{
+		$cart = app('cart');
+
+		$code = Input::get('coupon');
+
 		$coupons = [
 			'PROMO14' => [
 				'data' => [
@@ -183,10 +187,6 @@ class CartController extends BaseController {
 				}),
 			],
 		];
-
-		$cart = app('cart');
-
-		$code = Input::get('coupon');
 
 		if ( ! $coupon = array_get($coupons, $code))
 		{
