@@ -183,34 +183,29 @@
 
 <br>
 
-@if ( ! $items->isEmpty())
-{{-- Apply Coupons --}}
-@if ($coupon)
+{{-- Apply a Coupon --}}
+@if ( ! $items->isEmpty() && ! $coupon)
+
+{{ Form::open(array('route' => 'applyCoupon')) }}
+
 	<div class="row">
-		<a href="/coupon/remove" class="btn">Remove Coupon</a>
-	</div>
-@else
-	{{ Form::open(array('route' => 'applyCoupon')) }}
+		<div class="col-md-4">
+			<div class="form-group{{ $errors->first('name', ' has-error') }}">
+				<label for="coupon" class="control-label">Apply Coupon<i class="fa fa-info-circle"></i></label>
 
-		<div class="row">
-			<div class="col-md-4">
-				<div class="form-group{{ $errors->first('name', ' has-error') }}">
-					<label for="coupon" class="control-label">Apply Coupon<i class="fa fa-info-circle"></i></label>
+				<input type="text" class="form-control" name="coupon" id="coupon" placeholder="Coupon Code" value="" required>
 
-					<input type="text" class="form-control" name="coupon" id="coupon" placeholder="Coupon Code" value="" required>
-
-					<span class="help-block">Valid Codes: PROMO14, DISC2014</span>
-				</div>
+				<span class="help-block">Valid Codes: PROMO14, DISC2014</span>
 			</div>
 		</div>
+	</div>
 
-		<div class="form-group">
-			<button class="btn">Apply Coupon</button>
-		</div>
+	<div class="form-group">
+		<button class="btn">Apply Coupon</button>
+	</div>
 
-	{{ Form::close() }}
+{{ Form::close() }}
+
 @endif
-@endif
 
-<br>
 @stop
