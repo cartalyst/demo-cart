@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "731401805d457ec30a64c8c801eb6104",
+    "hash": "e459e8b04d22184154c49916298b3946",
     "packages": [
         {
             "name": "cartalyst/cart",
@@ -11,12 +11,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:cartalyst/cart.git",
-                "reference": "153a1bfe27e5be4edf7a7f18b8430c93fa6d9186"
+                "reference": "f6a8dbc3a5ad6898612158cc5edb7c6f86fc4a8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cartalyst/cart/zipball/153a1bfe27e5be4edf7a7f18b8430c93fa6d9186",
-                "reference": "153a1bfe27e5be4edf7a7f18b8430c93fa6d9186",
+                "url": "https://api.github.com/repos/cartalyst/cart/zipball/f6a8dbc3a5ad6898612158cc5edb7c6f86fc4a8a",
+                "reference": "f6a8dbc3a5ad6898612158cc5edb7c6f86fc4a8a",
                 "shasum": ""
             },
             "require": {
@@ -88,7 +88,7 @@
                 "source": "https://github.com/cartalyst/cart/tree/master",
                 "issues": "https://github.com/cartalyst/cart/issues"
             },
-            "time": "2014-04-15 11:22:48"
+            "time": "2014-04-16 03:59:14"
         },
         {
             "name": "cartalyst/conditions",
@@ -711,12 +711,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "6e8fb7c3cf5ee20383aa08b986c4d236b717d1bc"
+                "reference": "06f6e863fa65bb03976c6dbb79161fffb1e9a24a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/6e8fb7c3cf5ee20383aa08b986c4d236b717d1bc",
-                "reference": "6e8fb7c3cf5ee20383aa08b986c4d236b717d1bc",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/06f6e863fa65bb03976c6dbb79161fffb1e9a24a",
+                "reference": "06f6e863fa65bb03976c6dbb79161fffb1e9a24a",
                 "shasum": ""
             },
             "require": {
@@ -792,9 +792,7 @@
             },
             "autoload": {
                 "classmap": [
-                    [
-                        "src/Illuminate/Queue/IlluminateQueueClosure.php"
-                    ]
+                    "src/Illuminate/Queue/IlluminateQueueClosure.php"
                 ],
                 "files": [
                     "src/Illuminate/Support/helpers.php"
@@ -820,7 +818,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2014-04-14 02:55:49"
+            "time": "2014-04-15 22:12:18"
         },
         {
             "name": "machuga/authority",
@@ -1358,9 +1356,7 @@
             "authors": [
                 {
                     "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com",
-                    "homepage": "http://fabien.potencier.org",
-                    "role": "Lead Developer"
+                    "email": "fabien@symfony.com"
                 },
                 {
                     "name": "Chris Corbyn"
@@ -1546,12 +1542,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Debug.git",
-                "reference": "cf012d37f7e0d059fd6b35607e99761b33ccf4ed"
+                "reference": "bfa79006783489e800fa04eea787d557d603f29d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Debug/zipball/cf012d37f7e0d059fd6b35607e99761b33ccf4ed",
-                "reference": "cf012d37f7e0d059fd6b35607e99761b33ccf4ed",
+                "url": "https://api.github.com/repos/symfony/Debug/zipball/bfa79006783489e800fa04eea787d557d603f29d",
+                "reference": "bfa79006783489e800fa04eea787d557d603f29d",
                 "shasum": ""
             },
             "require": {
@@ -1594,7 +1590,7 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "http://symfony.com",
-            "time": "2014-03-26 18:07:42"
+            "time": "2014-04-15 16:41:05"
         },
         {
             "name": "symfony/dom-crawler",
