@@ -23,6 +23,11 @@ class CartController extends BaseController {
 		$this->cart = app('cart');
 	}
 
+	/**
+	 * Display a listing of products on the cart.
+	 *
+	 * @return \Illuminate\View\View
+	 */
 	public function index()
 	{
 		$cart = $this->cart;
@@ -36,6 +41,11 @@ class CartController extends BaseController {
 		return View::make('cart.cart', compact('cart', 'items', 'total', 'coupon'));
 	}
 
+	/**
+	 * Adds a new product to the shopping cart.
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
 	public function add($id)
 	{
 		// Get the product from the database
@@ -87,6 +97,11 @@ class CartController extends BaseController {
 		return Redirect::to('cart');
 	}
 
+	/**
+	 * Updates a product that is on the shopping cart.
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
 	public function update()
 	{
 		$this->cart->update(Input::get('update'));
@@ -94,6 +109,12 @@ class CartController extends BaseController {
 		return Redirect::to('cart');
 	}
 
+	/**
+	 * Deletes a product from the shopping cart.
+	 *
+	 * @param  string  $id
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
 	public function delete($id)
 	{
 		$this->cart->remove($id);
@@ -101,6 +122,11 @@ class CartController extends BaseController {
 		return Redirect::to('cart');
 	}
 
+	/**
+	 * Destroys the shopping cart.
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
 	public function destroy()
 	{
 		$this->cart->clear();
@@ -108,6 +134,11 @@ class CartController extends BaseController {
 		return Redirect::to('cart');
 	}
 
+	/**
+	 * Applies a coupon.
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
 	public function applyCoupon()
 	{
 		$code = Input::get('coupon');
@@ -147,7 +178,7 @@ class CartController extends BaseController {
 
 		if ( ! $coupon = array_get($coupons, $code))
 		{
-			return Redirect::back()->withErrors("[$code] is not a valid code.");
+			return Redirect::back()->withErrors("[{$code}] is not a valid coupon code.");
 		}
 
 		$couponCondition = new Condition($coupon['data']);
@@ -157,9 +188,15 @@ class CartController extends BaseController {
 
 		$this->cart->condition($couponCondition);
 
-		return Redirect::back()->withSuccess("Coupon has been applied.");
+		return Redirect::back()->withSuccess('Coupon has been applied.');
 	}
 
+	/**
+	 * Removes the given coupon.
+	 *
+	 * @param  string  $name
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
 	public function removeCoupon($name)
 	{
 		$this->cart->removeCondition($name);
@@ -167,11 +204,23 @@ class CartController extends BaseController {
 		return Redirect::back();
 	}
 
+	/**
+	 * Create a new condition.
+	 *
+	 * @param  string  $name
+	 * @param  string  $type
+	 * @param  string  $target
+	 * @param  array  $actions
+	 * @param  array  $rules
+	 * @return \Cartalyst\Conditions\Condition
+	 */
 	protected function createCondition($name, $type, $target, $actions = [], $rules = [])
 	{
 		$condition = new Condition(compact('name', 'type', 'target'));
 
 		$condition->setActions($actions);
+
+		$condition->setRules($rules);
 
 		return $condition;
 	}
