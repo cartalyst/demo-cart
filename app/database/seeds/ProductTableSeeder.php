@@ -17,7 +17,7 @@ class ProductTableSeeder extends Seeder {
 			$name = $lorem->word();
 
 			$product = new Product;
-			$product->slug = Str::slug($name);
+			$product->slug  = Str::slug($name);
 			$product->name  = ucfirst($name);
 			$product->price = $random->randomNumber(2);
 			$product->save();
