@@ -181,8 +181,6 @@ return array(
 		'Cart'      => 'Cartalyst\Cart\Laravel\Facades\Cart',
 		'Converter' => 'Cartalyst\Converter\Laravel\Facades\Converter',
 
-		'Wishlist'  => 'Cart\Facades\Wishlist',
-
 	),
 
 );
