@@ -28,32 +28,12 @@
 				</div>
 				{{{ $item->get('name') }}}
 
-				@if ( ! $item->get('attributes')->isEmpty())
-
-				<br>
-				@foreach ($item->attributes as $option)
-				{{{ $option->get('label') }}}: {{{ $option->get('value') }}}
-
-				@if ($option->has('price'))
-				<span class="pull-right">
-					{{{ $option->get('price') > 0 ? '+' : '-' }}}
-					{{{-- Currency::value($option->get('price'))->to('usd')->format() --}}}
-				</span>
-				@endif
-
-				<br>
-				@endforeach
-
-				@endif
-				<br>
 			</td>
 			<td>
 				<input class="form-control" type="text" name="update[{{{ $item->get('rowId') }}}][quantity]" value="{{{ $item->get('quantity') }}}" />
 			</td>
 			<td>{{{ convert_value($item->get('price')) }}}</td>
-			<td>
-				{{{ convert_value($item->total()) }}}
-			</td>
+			<td>{{{ convert_value($item->total()) }}}</td>
 			<td>
 				<a class="btn btn-danger btn-xs" href="{{ URL::to("cart/{$item->get('rowId')}/remove") }}">Delete</a>
 			</td>
@@ -82,9 +62,9 @@
 		@foreach ($cart->itemsConditionsTotal('discount') as $name => $value)
 		<tr>
 			<td colspan="4">
-				<span class="pull-right">{{ $name }}</span>
+				<span class="pull-right">{{{ $name }}}</span>
 			</td>
-			<td colspan="2">{{ convert_value($value) }}</td>
+			<td colspan="2">{{{ convert_value($value) }}}</td>
 		</tr>
 		@endforeach
 
@@ -92,9 +72,9 @@
 		@foreach ($cart->itemsConditionsTotal('tax') as $name => $value)
 		<tr>
 			<td colspan="4">
-				<span class="pull-right">{{ $name }}</span>
+				<span class="pull-right">{{{ $name }}}</span>
 			</td>
-			<td colspan="2">{{ convert_value($value) }}</td>
+			<td colspan="2">{{{ convert_value($value) }}}</td>
 		</tr>
 		@endforeach
 
@@ -102,9 +82,9 @@
 		@foreach ($cart->itemsConditionsTotal('shipping') as $name => $value)
 		<tr>
 			<td colspan="4">
-				<span class="pull-right">{{ $name }}</span>
+				<span class="pull-right">{{{ $name }}}</span>
 			</td>
-			<td colspan="2">{{ convert_value($value) }}</td>
+			<td colspan="2">{{{ convert_value($value) }}}</td>
 		</tr>
 		@endforeach
 
@@ -112,9 +92,9 @@
 		@foreach ($cart->conditionsTotal('discount', false) as $name => $value)
 		<tr>
 			<td colspan="4">
-				<span class="pull-right">{{ $name }}</span>
+				<span class="pull-right">{{{ $name }}}</span>
 			</td>
-			<td colspan="2">{{ convert_value($value) }}</td>
+			<td colspan="2">{{{ convert_value($value) }}}</td>
 		</tr>
 		@endforeach
 
@@ -122,9 +102,9 @@
 		@foreach ($cart->conditionsTotal('tax', false) as $name => $value)
 		<tr>
 			<td colspan="4">
-				<span class="pull-right">{{ $name }}</span>
+				<span class="pull-right">{{{ $name }}}</span>
 			</td>
-			<td colspan="2">{{ convert_value($value) }}</td>
+			<td colspan="2">{{{ convert_value($value) }}}</td>
 		</tr>
 		@endforeach
 
@@ -143,9 +123,9 @@
 		@foreach ($cart->conditionsTotal('shipping', false) as $name => $value)
 		<tr>
 			<td colspan="4">
-				<span class="pull-right">{{ $name }}</span>
+				<span class="pull-right">{{{ $name }}}</span>
 			</td>
-			<td colspan="2">{{ convert_value($value) }}</td>
+			<td colspan="2">{{{ convert_value($value) }}}</td>
 		</tr>
 		@endforeach
 
@@ -189,15 +169,19 @@
 {{ Form::open(array('route' => 'applyCoupon')) }}
 
 	<div class="row">
+
 		<div class="col-md-4">
-			<div class="form-group{{ $errors->first('name', ' has-error') }}">
+
+			<div class="form-group">
 				<label for="coupon" class="control-label">Apply Coupon<i class="fa fa-info-circle"></i></label>
 
 				<input type="text" class="form-control" name="coupon" id="coupon" placeholder="Coupon Code" value="" required>
 
 				<span class="help-block">Valid Codes: PROMO14, DISC2014</span>
 			</div>
+
 		</div>
+
 	</div>
 
 	<div class="form-group">
