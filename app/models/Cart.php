@@ -6,10 +6,7 @@ class Cart extends Model {
 
 	public function delete()
 	{
-		foreach($this->items as $item)
-		{
-			$item->delete();
-		}
+		$this->items()->delete();
 
 		return parent::delete();
 	}

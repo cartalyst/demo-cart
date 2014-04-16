@@ -94,7 +94,7 @@ class CartController extends BaseController {
 			'shipping',
 		]);
 
-		return Redirect::to('cart');
+		return Redirect::to('cart')->withSuccess("{$product->name} was successfully added to the shopping cart.");
 	}
 
 	/**
@@ -106,7 +106,7 @@ class CartController extends BaseController {
 	{
 		$this->cart->update(Input::get('update'));
 
-		return Redirect::to('cart');
+		return Redirect::to('cart')->withSuccess('Cart was successfully updated.');
 	}
 
 	/**
@@ -188,7 +188,7 @@ class CartController extends BaseController {
 
 		$this->cart->condition($couponCondition);
 
-		return Redirect::back()->withSuccess('Coupon has been applied.');
+		return Redirect::back()->withSuccess('Coupon was successfully applied.');
 	}
 
 	/**
@@ -201,7 +201,7 @@ class CartController extends BaseController {
 	{
 		$this->cart->removeCondition($name);
 
-		return Redirect::back();
+		return Redirect::back()->withSuccess('Coupon was successfully removed.');
 	}
 
 	/**
