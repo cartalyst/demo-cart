@@ -116,7 +116,8 @@ class CartController extends BaseController {
 
 			'PROMO14' => [
 				'data' => [
-					'name'   => "Limited Time 10% Off (code: $code)",
+					'code'   => 'PROMO14',
+					'name'   => 'Limited Time 10% Off',
 					'type'   => 'coupon',
 					'target' => 'subtotal',
 				],
@@ -128,7 +129,8 @@ class CartController extends BaseController {
 
 			'DISC2014' => [
 				'data' => [
-					'name'   => "Limited Time $25 Off on all purchases over $200 (code: $code)",
+					'code'   => 'DISC2014',
+					'name'   => 'Limited Time $25 Off on all purchases over $200',
 					'type'   => 'coupon',
 					'target' => 'subtotal',
 				],

@@ -50,9 +50,9 @@
 			<td>
 				<input class="form-control" type="text" name="update[{{{ $item->get('rowId') }}}][quantity]" value="{{{ $item->get('quantity') }}}" />
 			</td>
-			<td>{{{ Converter::value($item->get('price'))->from('currency.eur')->to('currency.usd')->format() }}}</td>
+			<td>{{{ convert_value($item->get('price')) }}}</td>
 			<td>
-				{{{ Converter::value($item->total())->from('currency.eur')->to('currency.usd')->format() }}}
+				{{{ convert_value($item->total()) }}}
 			</td>
 			<td>
 				<a class="btn btn-danger btn-xs" href="{{ URL::to("cart/{$item->get('rowId')}/remove") }}">Delete</a>
@@ -69,13 +69,13 @@
 			<td colspan="4">
 				<span class="pull-right">Subtotal</span>
 			</td>
-			<td colspan="2">{{{ Converter::value($cart->subtotal())->from('currency.eur')->to('currency.usd')->format() }}}</td>
+			<td colspan="2">{{{ convert_value($cart->subtotal()) }}}</td>
 		</tr>
 		<tr>
 			<td colspan="4">
 				<span class="pull-right">Subtotal (with discounts)</span>
 			</td>
-			<td colspan="2">{{{ Converter::value($cart->total('discount'))->from('currency.eur')->to('currency.usd')->format() }}}</td>
+			<td colspan="2">{{{ convert_value($cart->total('discount')) }}}</td>
 		</tr>
 
 		{{-- Items Discounts --}}
@@ -84,7 +84,7 @@
 			<td colspan="4">
 				<span class="pull-right">{{ $name }}</span>
 			</td>
-			<td colspan="2">{{ Converter::value($value)->to('currency.usd')->format() }}</td>
+			<td colspan="2">{{ convert_value($value) }}</td>
 		</tr>
 		@endforeach
 
@@ -94,7 +94,7 @@
 			<td colspan="4">
 				<span class="pull-right">{{ $name }}</span>
 			</td>
-			<td colspan="2">{{ Converter::value($value)->to('currency.usd')->format() }}</td>
+			<td colspan="2">{{ convert_value($value) }}</td>
 		</tr>
 		@endforeach
 
@@ -104,7 +104,7 @@
 			<td colspan="4">
 				<span class="pull-right">{{ $name }}</span>
 			</td>
-			<td colspan="2">{{ Converter::value($value)->to('currency.usd')->format() }}</td>
+			<td colspan="2">{{ convert_value($value) }}</td>
 		</tr>
 		@endforeach
 
@@ -114,7 +114,7 @@
 			<td colspan="4">
 				<span class="pull-right">{{ $name }}</span>
 			</td>
-			<td colspan="2">{{ Converter::value($value)->to('currency.usd')->format() }}</td>
+			<td colspan="2">{{ convert_value($value) }}</td>
 		</tr>
 		@endforeach
 
@@ -124,18 +124,18 @@
 			<td colspan="4">
 				<span class="pull-right">{{ $name }}</span>
 			</td>
-			<td colspan="2">{{ Converter::value($value)->to('currency.usd')->format() }}</td>
+			<td colspan="2">{{ convert_value($value) }}</td>
 		</tr>
 		@endforeach
 
 		{{-- Cart Coupons --}}
-		@foreach ($cart->conditionsTotal('coupon', false) as $name => $value)
+		@foreach ($cart->conditions('coupon') as $condition)
 		<tr class="success">
 			<td colspan="4">
-				<a href="{{ URL::to('coupon/remove', $name) }}" class="pull-left label label-danger"><i class="glyphicon glyphicon-remove"></i></a>
-				<span class="pull-right">{{ $name }}</span>
+				<a href="{{ URL::to('coupon/remove', $condition->get('name')) }}" class="pull-left label label-danger"><i class="glyphicon glyphicon-remove"></i></a>
+				<span class="pull-right">{{{ $condition->get('name') }}} ({{{ $condition->get('code') }}})</span>
 			</td>
-			<td colspan="2">{{ Converter::value($value)->to('currency.usd')->format() }}</td>
+			<td colspan="2">{{{ convert_value($condition->result()) }}}</td>
 		</tr>
 		@endforeach
 
@@ -145,7 +145,7 @@
 			<td colspan="4">
 				<span class="pull-right">{{ $name }}</span>
 			</td>
-			<td colspan="2">{{ Converter::value($value)->to('currency.usd')->format() }}</td>
+			<td colspan="2">{{ convert_value($value) }}</td>
 		</tr>
 		@endforeach
 
@@ -160,7 +160,7 @@
 			<td colspan="4">
 				<span class="pull-right">Total Usd</span>
 			</td>
-			<td colspan="2">{{{ Converter::value($total)->to('currency.usd')->format() }}}</td>
+			<td colspan="2">{{{ convert_value($total) }}}</td>
 		</tr>
 		<tr>
 			<td colspan="4">
