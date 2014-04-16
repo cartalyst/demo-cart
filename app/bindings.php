@@ -1,9 +1,7 @@
 <?php
 
 use Cartalyst\Cart\Cart;
-use Cartalyst\Cart\Storage\Sessions\IlluminateSession;
-
-$app = app();
+use Cartalyst\Cart\Storage\IlluminateSession;
 
 /*
 |--------------------------------------------------------------------------
