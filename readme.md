@@ -5,10 +5,13 @@ This is a basic demo showing some of the functionality of the Cart package.
 In this demo we are covering the following:
 
 - Add a product to the shopping cart
-- Remove the product from the shopping cart
+- Remove a product from the shopping cart
 - Update the item quantity
 - Apply a coupon to the shopping cart
 - Clear the shopping cart
+- Add a product to the wishlist
+- Remove a product from the wishlist
+- Clear the wishlist
 - Usage of various conditions
 - Store the whole shopping cart on the database
 - When logging in we are syncing the shopping cart back from the database
