@@ -2,35 +2,35 @@
 
 This is a basic demo showing some of the functionality of the Cart package.
 
+
 ## Installation
 
 To install this demo, firstly you must be a subscriber of Cartalyst's [Arsenal](http://cartalyst.com/arsenal).
 
-##### 1. Clone this repo:
+1. Clone this repo:
 
-```
-git clone git@github.com:cartalyst/demo-cart.git
-```
+        git clone git@github.com:cartalyst/demo-cart.git
 
-##### 2. Setup your virtual host.
+2. Setup your virtual host.
 
-##### 3. Go into the app directory in your terminal and install the dependencies:
+3. Go into the directory in your terminal app and install the composer dependencies:
 
-```
-composer install
-```
+        composer install
 
-##### 4. Configure your database connection by opening `app/config/database.php` file.
+4. Configure your database connection.
 
-##### 5. Run the migrations
+5. Run migrations for Sentry and the main application
 
-```
-php artisan migrate
-php artisan migrate --package="cartalyst/sentry"
-```
+        php artisan migrate --package=cartalyst/sentry
+        php artisan migrate
 
-##### 6. Seed the database
+6. Seed your database (you can do this as many times as you want, it will reset the database each time).
 
-````
-php artisan db:seed
-```
+        php artisan db:seed
+
+
+## Usage
+
+> *Note:* This demo is not a fully-fledged app. It's a demo, so we're not covering every possible scenario or completed every endpoint.
+
+
