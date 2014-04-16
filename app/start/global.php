@@ -83,3 +83,5 @@ require app_path().'/filters.php';
 require app_path().'/bindings.php';
 
 require app_path().'/events.php';
+
+require app_path().'/helpers.php';
