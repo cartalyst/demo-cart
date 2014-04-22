@@ -6,7 +6,9 @@
 
 	@foreach ($products as $product)
 	<div class="col-3 col-sm-3 col-lg-3">
+
 		<div class="thumbnail">
+
 			<div class="caption">
 				<h2>{{{ $product->name }}}</h2>
 				<p>{{ convert_value($product->price) }}</p>
@@ -27,8 +29,11 @@
 						@endif
 					</span>
 				</p>
+
 			</div>
+
 		</div>
+
 	</div>
 	@endforeach
 
