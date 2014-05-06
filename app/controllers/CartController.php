@@ -199,7 +199,7 @@ class CartController extends BaseController {
 	 */
 	public function removeCoupon($name)
 	{
-		$this->cart->removeCondition($name);
+		$this->cart->removeConditionByName($name);
 
 		return Redirect::back()->withSuccess('Coupon was successfully removed.');
 	}
