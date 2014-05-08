@@ -4,53 +4,89 @@ use App\Models\Product;
 
 class WishlistController extends BaseController {
 
-	public function index()
+	/**
+	 * The wishlist instance.
+	 *
+	 * @var \Cartalyst\Cart\Cart
+	 */
+	protected $wishlist;
+
+	/**
+	 * Constructor.
+	 *
+	 * @return void
+	 */
+	public function __construct()
 	{
-		$cart = app('wishlist');
-
-		$items = $cart->items();
-
-		$total = $cart->total();
-
-		return View::make('cart.wishlist', compact('cart', 'items', 'total'));
+		$this->wishlist = app('wishlist');
 	}
 
+	/**
+	 * Display a listing of products on the wishlist.
+	 *
+	 * @return \Illuminate\View\View
+	 */
+	public function index()
+	{
+		$items = $this->wishlist->items();
+
+		$total = $this->wishlist->total();
+
+		return View::make('cart.wishlist', compact('items', 'total'));
+	}
+
+	/**
+	 * Adds a new product to the wishlist.
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
 	public function add($id)
 	{
 		$product = Product::find($id);
 
-		$data = array(
+		$data = [
 			'id'       => $product->id,
 			'name'     => $product->name,
 			'price'    => $product->price,
 			'quantity' => 1,
-		);
+		];
 
-		app('wishlist')->add($data);
+		$this->wishlist->add($data);
 
 		return Redirect::back();
 	}
 
+	/**
+	 * Deletes a product from the wishlist.
+	 *
+	 * @param  string  $id
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
 	public function delete($id)
 	{
 		$product = Product::find($id);
 
-		$data = array(
+		$data = [
 			'id'       => $product->id,
 			'name'     => $product->name,
 			'quantity' => 1,
-		);
+		];
 
-		$rowId = head(app('wishlist')->find($data))->get('rowId');
+		$rowId = head($this->wishlist->find($data))->get('rowId');
 
-		app('wishlist')->remove($rowId);
+		$this->wishlist->remove($rowId);
 
 		return Redirect::back();
 	}
 
+	/**
+	 * Destroys the wishlist.
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
 	public function destroy()
 	{
-		app('wishlist')->clear();
+		$this->wishlist->clear();
 
 		return Redirect::to('wishlist');
 	}

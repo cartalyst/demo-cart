@@ -30,13 +30,11 @@ class CartController extends BaseController {
 	 */
 	public function index()
 	{
-		$cart = $this->cart;
+		$items = $this->cart->items();
 
-		$items = $cart->items();
+		$total = $this->cart->total();
 
-		$total = $cart->total();
-
-		$coupon = $cart->conditions('coupon');
+		$coupon = $this->cart->conditions('coupon');
 
 		return View::make('cart.cart', compact('cart', 'items', 'total', 'coupon'));
 	}
