@@ -11,12 +11,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:cartalyst/cart.git",
-                "reference": "5f6a9db82ecfb078359b732ff30ffb5e4bdfa794"
+                "reference": "8ad0045eaf420931e8fb9ab6030b0c7d66de93a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cartalyst/cart/zipball/5f6a9db82ecfb078359b732ff30ffb5e4bdfa794",
-                "reference": "5f6a9db82ecfb078359b732ff30ffb5e4bdfa794",
+                "url": "https://api.github.com/repos/cartalyst/cart/zipball/8ad0045eaf420931e8fb9ab6030b0c7d66de93a3",
+                "reference": "8ad0045eaf420931e8fb9ab6030b0c7d66de93a3",
                 "shasum": ""
             },
             "require": {
@@ -88,7 +88,7 @@
                 "source": "https://github.com/cartalyst/cart/tree/master",
                 "issues": "https://github.com/cartalyst/cart/issues"
             },
-            "time": "2014-05-08 19:37:28"
+            "time": "2014-05-08 21:26:30"
         },
         {
             "name": "cartalyst/conditions",
