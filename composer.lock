@@ -11,12 +11,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:cartalyst/cart.git",
-                "reference": "8ad0045eaf420931e8fb9ab6030b0c7d66de93a3"
+                "reference": "ea536941883243141f4dbd79301b441f058a0854"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cartalyst/cart/zipball/8ad0045eaf420931e8fb9ab6030b0c7d66de93a3",
-                "reference": "8ad0045eaf420931e8fb9ab6030b0c7d66de93a3",
+                "url": "https://api.github.com/repos/cartalyst/cart/zipball/ea536941883243141f4dbd79301b441f058a0854",
+                "reference": "ea536941883243141f4dbd79301b441f058a0854",
                 "shasum": ""
             },
             "require": {
@@ -85,10 +85,10 @@
                 "shopping"
             ],
             "support": {
-                "source": "https://github.com/cartalyst/cart/tree/master",
+                "source": "https://github.com/cartalyst/cart/tree/v1.0.0",
                 "issues": "https://github.com/cartalyst/cart/issues"
             },
-            "time": "2014-05-08 21:26:30"
+            "time": "2014-05-09 18:50:55"
         },
         {
             "name": "cartalyst/conditions",
@@ -96,12 +96,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:cartalyst/conditions.git",
-                "reference": "23c6f61a97db1182b3cbf35861953a02bb76b169"
+                "reference": "2e7c0618566b89cf0df128bf1fa093d13c046b2b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cartalyst/conditions/zipball/23c6f61a97db1182b3cbf35861953a02bb76b169",
-                "reference": "23c6f61a97db1182b3cbf35861953a02bb76b169",
+                "url": "https://api.github.com/repos/cartalyst/conditions/zipball/2e7c0618566b89cf0df128bf1fa093d13c046b2b",
+                "reference": "2e7c0618566b89cf0df128bf1fa093d13c046b2b",
                 "shasum": ""
             },
             "require": {
@@ -109,6 +109,7 @@
                 "php": ">=5.4.0"
             },
             "require-dev": {
+                "jeremeamia/superclosure": "~1.0",
                 "mockery/mockery": "~0.9",
                 "phpunit/phpunit": "~4.0"
             },
@@ -153,7 +154,7 @@
                     "role": "Developer"
                 }
             ],
-            "description": "A framework agnostic conditions package that allows you to apply different types of conditions on Illuminate Collections.",
+            "description": "A modern and framework agnostic conditions package that allows you to apply conditions on Illuminate Collections.",
             "keywords": [
                 "cartalyst",
                 "collection",
@@ -165,7 +166,7 @@
                 "source": "https://github.com/cartalyst/conditions/tree/master",
                 "issues": "https://github.com/cartalyst/conditions/issues"
             },
-            "time": "2014-05-08 17:16:10"
+            "time": "2014-05-10 02:53:03"
         },
         {
             "name": "cartalyst/converter",
@@ -173,23 +174,23 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:cartalyst/converter.git",
-                "reference": "39252b50ef3484fe8e9642f0197aa036478bf6e9"
+                "reference": "0a213ccd7d3439ffbcb30035fd5fd502fb5e5664"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cartalyst/converter/zipball/39252b50ef3484fe8e9642f0197aa036478bf6e9",
-                "reference": "39252b50ef3484fe8e9642f0197aa036478bf6e9",
+                "url": "https://api.github.com/repos/cartalyst/converter/zipball/0a213ccd7d3439ffbcb30035fd5fd502fb5e5664",
+                "reference": "0a213ccd7d3439ffbcb30035fd5fd502fb5e5664",
                 "shasum": ""
             },
             "require": {
                 "guzzle/guzzle": "~3.8",
-                "illuminate/cache": "~4",
-                "illuminate/filesystem": "~4",
+                "illuminate/cache": "~4.1",
+                "illuminate/filesystem": "~4.1",
                 "php": ">=5.3.0"
             },
             "require-dev": {
-                "mockery/mockery": "0.9.*",
-                "phpunit/phpunit": "4.0.*"
+                "mockery/mockery": "~0.9",
+                "phpunit/phpunit": "~4.0"
             },
             "type": "library",
             "extra": {
@@ -249,7 +250,7 @@
                 "source": "https://github.com/cartalyst/converter/tree/master",
                 "issues": "https://github.com/cartalyst/converter/issues"
             },
-            "time": "2014-05-08 17:18:22"
+            "time": "2014-05-09 19:26:18"
         },
         {
             "name": "cartalyst/sentry",
@@ -482,12 +483,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "904496ef8f0277cecababbc8add214bfc23ff467"
+                "reference": "a47e8c188d6b6b69ce0211a1347947a620729a42"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/904496ef8f0277cecababbc8add214bfc23ff467",
-                "reference": "904496ef8f0277cecababbc8add214bfc23ff467",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/a47e8c188d6b6b69ce0211a1347947a620729a42",
+                "reference": "a47e8c188d6b6b69ce0211a1347947a620729a42",
                 "shasum": ""
             },
             "require": {
@@ -524,7 +525,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2014-05-06 22:05:17"
+            "time": "2014-05-09 10:12:47"
         },
         {
             "name": "guzzle/guzzle",
@@ -711,12 +712,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "1c8fb08d0d071272ce65fc2db5170d6ba7ce7f4d"
+                "reference": "1ae7be20bc5416fe7056979e0ec05f3f88e3d040"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/1c8fb08d0d071272ce65fc2db5170d6ba7ce7f4d",
-                "reference": "1c8fb08d0d071272ce65fc2db5170d6ba7ce7f4d",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/1ae7be20bc5416fe7056979e0ec05f3f88e3d040",
+                "reference": "1ae7be20bc5416fe7056979e0ec05f3f88e3d040",
                 "shasum": ""
             },
             "require": {
@@ -819,7 +820,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2014-05-08 17:35:43"
+            "time": "2014-05-09 12:04:41"
         },
         {
             "name": "machuga/authority",
@@ -2056,48 +2057,36 @@
             "time": "2014-04-23 14:04:21"
         },
         {
-            "name": "symfony/security",
+            "name": "symfony/security-core",
             "version": "2.4.x-dev",
-            "target-dir": "Symfony/Component/Security",
+            "target-dir": "Symfony/Component/Security/Core",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/Security.git",
-                "reference": "cfe0fa933ce71c14fa0675af131a3797e4a88045"
+                "url": "https://github.com/symfony/security-core.git",
+                "reference": "1fbe80d10b7a5bcb619abe3e4cfede795d9958dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Security/zipball/cfe0fa933ce71c14fa0675af131a3797e4a88045",
-                "reference": "cfe0fa933ce71c14fa0675af131a3797e4a88045",
+                "url": "https://api.github.com/repos/symfony/security-core/zipball/1fbe80d10b7a5bcb619abe3e4cfede795d9958dc",
+                "reference": "1fbe80d10b7a5bcb619abe3e4cfede795d9958dc",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3",
-                "symfony/event-dispatcher": "~2.1",
-                "symfony/http-foundation": "~2.1",
-                "symfony/http-kernel": "~2.4"
-            },
-            "replace": {
-                "symfony/security-acl": "self.version",
-                "symfony/security-core": "self.version",
-                "symfony/security-csrf": "self.version",
-                "symfony/security-http": "self.version"
+                "php": ">=5.3.3"
             },
             "require-dev": {
-                "doctrine/common": "~2.2",
-                "doctrine/dbal": "~2.2",
                 "ircmaxell/password-compat": "1.0.*",
                 "psr/log": "~1.0",
+                "symfony/event-dispatcher": "~2.1",
                 "symfony/expression-language": "~2.4",
-                "symfony/routing": "~2.2",
+                "symfony/http-foundation": "~2.4",
                 "symfony/validator": "~2.2"
             },
             "suggest": {
-                "doctrine/dbal": "For using the built-in ACL implementation",
                 "ircmaxell/password-compat": "For using the BCrypt password encoder in PHP <5.5",
-                "symfony/class-loader": "For using the ACL generateSql script",
+                "symfony/event-dispatcher": "",
                 "symfony/expression-language": "For using the expression voter",
-                "symfony/finder": "For using the ACL generateSql script",
-                "symfony/routing": "For using the HttpUtils class to create sub-requests, redirect the user, and match URLs",
+                "symfony/http-foundation": "",
                 "symfony/validator": "For using the user password constraint"
             },
             "type": "library",
@@ -2108,7 +2097,7 @@
             },
             "autoload": {
                 "psr-0": {
-                    "Symfony\\Component\\Security\\": ""
+                    "Symfony\\Component\\Security\\Core\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2127,9 +2116,9 @@
                     "homepage": "http://symfony.com/contributors"
                 }
             ],
-            "description": "Symfony Security Component",
+            "description": "Symfony Security Component - Core Library",
             "homepage": "http://symfony.com",
-            "time": "2014-05-02 13:46:37"
+            "time": "2014-04-23 14:04:21"
         },
         {
             "name": "symfony/translation",
