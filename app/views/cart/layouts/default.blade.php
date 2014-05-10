@@ -34,8 +34,8 @@
 				<div class="collapse navbar-collapse navbar-ex1-collapse">
 					<ul class="nav navbar-nav">
 						<li{{ Request::is('/') ? ' class="active"' : null }}><a href="{{ URL::to('/') }}">Products</a></li>
-						<li{{ Request::is('cart') ? ' class="active"' : null }}><a href="{{ URL::to('cart') }}">Cart</a></li>
-						<li{{ Request::is('wishlist') ? ' class="active"' : null }}><a href="{{ URL::to('wishlist') }}">Wishlist</a></li>
+						<li{{ Request::is('cart') ? ' class="active"' : null }}><a href="{{ URL::to('cart') }}">Cart <span class="badge cartCount">{{ app('cart')->items()->count() }}</span></a></li>
+						<li{{ Request::is('wishlist') ? ' class="active"' : null }}><a href="{{ URL::to('wishlist') }}">Wishlist <span class="badge wishlistCount">{{ app('wishlist')->items()->count() }}</span></a></li>
 					</ul>
 
 					<ul class="nav navbar-nav navbar-right">
@@ -56,5 +56,8 @@
 		<script type="text/javascript">
 		$('.tip').tooltip();
 		</script>
+
+		@yield('scripts')
+
 	</body>
 </html>

@@ -28,11 +28,13 @@ class WishlistController extends BaseController {
 	 */
 	public function index()
 	{
+		$wishlist = $this->wishlist;
+
 		$items = $this->wishlist->items();
 
 		$total = $this->wishlist->total();
 
-		return View::make('cart.wishlist', compact('items', 'total'));
+		return View::make('cart.wishlist', compact('wishlist', 'items', 'total'));
 	}
 
 	/**
@@ -44,14 +46,7 @@ class WishlistController extends BaseController {
 	{
 		$product = Product::find($id);
 
-		$data = [
-			'id'       => $product->id,
-			'name'     => $product->name,
-			'price'    => $product->price,
-			'quantity' => 1,
-		];
-
-		$this->wishlist->add($data);
+		$this->addToWishlist($product);
 
 		return Redirect::back();
 	}
@@ -64,17 +59,7 @@ class WishlistController extends BaseController {
 	 */
 	public function delete($id)
 	{
-		$product = Product::find($id);
-
-		$data = [
-			'id'       => $product->id,
-			'name'     => $product->name,
-			'quantity' => 1,
-		];
-
-		$rowId = head($this->wishlist->find($data))->get('rowId');
-
-		$this->wishlist->remove($rowId);
+		$this->wishlist->remove($id);
 
 		return Redirect::back();
 	}
@@ -89,6 +74,69 @@ class WishlistController extends BaseController {
 		$this->wishlist->clear();
 
 		return Redirect::to('wishlist');
+	}
+
+	/**
+	 * Adds a new product to the shopping cart.
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function addAjax($id)
+	{
+		// Get the product from the database
+		if ( ! $product = Product::find($id))
+		{
+			return json_encode([
+				'error' => 'invalid product.',
+			]);
+		}
+
+		// Add the item to the cart
+		$item = $this->addToWishlist($product);
+
+		return $item->toArray();
+	}
+
+	/**
+	 * Deletes a product from the shopping cart.
+	 *
+	 * @param  string  $id
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function deleteAjax($id)
+	{
+		$item = $this->wishlist->item($id);
+
+		$this->wishlist->remove($id);
+
+		return ['message' => 'success', 'id' => $item->get('id')];
+	}
+
+	/**
+	 * Deletes a product from the shopping cart.
+	 *
+	 * @param  string  $id
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function countAjax()
+	{
+		return $this->wishlist->items()->count();
+	}
+
+	/**
+	 * Add product to wishlist.
+	 *
+	 * @param App\Models\Product  $product
+	 * @return Cartalyst\Cart\Collections\ItemCollection
+	 */
+	protected function addToWishlist($product)
+	{
+		return $this->wishlist->add([
+			'id'         => $product->id,
+			'name'       => $product->name,
+			'price'      => $product->price,
+			'quantity'   => 1,
+		]);
 	}
 
 }

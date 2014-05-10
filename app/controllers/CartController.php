@@ -54,45 +54,7 @@ class CartController extends BaseController {
 			return Redirect::to('/');
 		}
 
-		// Item conditions
-		$condition1 = $this->createCondition('VAT (17.5%)', 'tax', 'subtotal', ['value' => '17.50%']);
-		$condition2 = $this->createCondition('VAT (23%)', 'tax', 'subtotal', ['value' => '23%']);
-		$condition3 = $this->createCondition('Discount (7.5%)', 'discount', 'subtotal', ['value' => '-7.5%']);
-		$condition4 = $this->createCondition('Item Based Shipping', 'shipping', 'subtotal', ['value' => '20.00']);
-
-		// Add the item to the cart
-		$this->cart->add([
-			'id'         => $product->id,
-			'name'       => $product->name,
-			'price'      => $product->price,
-			'quantity'   => 1,
-			'conditions' => [$condition1, $condition2, $condition3, $condition4],
-		]);
-
-		// Global conditions
-		$condition1 = $this->createCondition('Global Tax (12.5%)', 'tax', 'subtotal', ['value' => '12.50%']);
-		$condition2 = $this->createCondition('Global discount (5%)', 'tax', 'subtotal', ['value' => '-5%']);
-		$condition3 = $this->createCondition('Global Shipping', 'shipping', 'subtotal', ['value' => '20.00%']);
-
-		// Set the global conditions
-		$this->cart->condition([$condition1, $condition2, $condition3]);
-
-		// Set the global conditions order
-		$this->cart->setConditionsOrder([
-			'discount',
-			'other',
-			'tax',
-			'shipping',
-			'coupon',
-		]);
-
-		// Set the items conditions order
-		$this->cart->setItemsConditionsOrder([
-			'discount',
-			'other',
-			'tax',
-			'shipping',
-		]);
+		$this->addToCart($product);
 
 		return Redirect::to('cart')->withSuccess("{$product->name} was successfully added to the shopping cart.");
 	}
@@ -132,6 +94,53 @@ class CartController extends BaseController {
 		$this->cart->clear();
 
 		return Redirect::to('cart');
+	}
+
+	/**
+	 * Adds a new product to the shopping cart.
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function addAjax($id)
+	{
+		// Get the product from the database
+		if ( ! $product = Product::find($id))
+		{
+			return json_encode([
+				'error' => 'invalid product.',
+			]);
+		}
+
+		// Add the item to the cart
+		$item = $this->addToCart($product);
+
+		return $item->toArray();
+	}
+
+	/**
+	 * Deletes a product from the shopping cart.
+	 *
+	 * @param  string  $id
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function deleteAjax($id)
+	{
+		$item = $this->cart->item($id);
+
+		$this->cart->remove($id);
+
+		return ['message' => 'success', 'id' => $item->get('id')];
+	}
+
+	/**
+	 * Deletes a product from the shopping cart.
+	 *
+	 * @param  string  $id
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function countAjax()
+	{
+		return $this->cart->items()->count();
 	}
 
 	/**
@@ -202,6 +211,57 @@ class CartController extends BaseController {
 		$this->cart->removeConditionByName($name);
 
 		return Redirect::back()->withSuccess('Coupon was successfully removed.');
+	}
+
+	/**
+	 * Add product to cart.
+	 *
+	 * @param App\Models\Product  $product
+	 * @return Cartalyst\Cart\Collections\ItemCollection
+	 */
+	protected function addToCart($product)
+	{
+		// Item conditions
+		$condition1 = $this->createCondition('VAT (17.5%)', 'tax', 'subtotal', ['value' => '17.50%']);
+		$condition2 = $this->createCondition('VAT (23%)', 'tax', 'subtotal', ['value' => '23%']);
+		$condition3 = $this->createCondition('Discount (7.5%)', 'discount', 'subtotal', ['value' => '-7.5%']);
+		$condition4 = $this->createCondition('Item Based Shipping', 'shipping', 'subtotal', ['value' => '20.00']);
+
+		// Add the item to the cart
+		$item = $this->cart->add([
+			'id'         => $product->id,
+			'name'       => $product->name,
+			'price'      => $product->price,
+			'quantity'   => 1,
+			'conditions' => [$condition1, $condition2, $condition3, $condition4],
+		]);
+
+		// Global conditions
+		$condition1 = $this->createCondition('Global Tax (12.5%)', 'tax', 'subtotal', ['value' => '12.50%']);
+		$condition2 = $this->createCondition('Global discount (5%)', 'tax', 'subtotal', ['value' => '-5%']);
+		$condition3 = $this->createCondition('Global Shipping', 'shipping', 'subtotal', ['value' => '20.00%']);
+
+		// Set the global conditions
+		$this->cart->condition([$condition1, $condition2, $condition3]);
+
+		// Set the global conditions order
+		$this->cart->setConditionsOrder([
+			'discount',
+			'other',
+			'tax',
+			'shipping',
+			'coupon',
+		]);
+
+		// Set the items conditions order
+		$this->cart->setItemsConditionsOrder([
+			'discount',
+			'other',
+			'tax',
+			'shipping',
+		]);
+
+		return $item;
 	}
 
 	/**
