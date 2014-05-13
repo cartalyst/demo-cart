@@ -17,7 +17,7 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td>admin@admin</td>
+							<td>admin@admin.com</td>
 							<td>password</td>
 						</tr>
 						<tr>
