@@ -25,12 +25,10 @@ $(document).on('click', '.btn-add', function(e)
 	$.ajax({
 		url: link
 	}).done(function(res) {
-
 		self.removeClass('btn-info').addClass('btn-danger').removeClass('btn-add').addClass('btn-remove').text('Remove');
 		self.attr('href', "cart/" + res.rowId + '/remove');
 
 		ajaxCount('cart');
-
 	});
 });
 
@@ -44,13 +42,11 @@ $(document).on('click', '.wishlist-add', function(e)
 	$.ajax({
 		url: link
 	}).done(function(res) {
-
 		self.removeClass('wishlist-add').addClass('wishlist-remove');
 		self.find('i').removeClass('glyphicon-star-empty').addClass('glyphicon-star');
 		self.attr('href', "wishlist/" + res.rowId + '/remove');
 
 		ajaxCount('wishlist');
-
 	});
 });
 
@@ -64,7 +60,6 @@ $(document).on('click', '.btn-remove', function(e)
 	$.ajax({
 		url: link
 	}).done(function(res) {
-
 		if (res.message === 'success')
 		{
 			self.removeClass('btn-danger').addClass('btn-info').removeClass('btn-remove').addClass('btn-add').text('Add Cart');
@@ -72,7 +67,6 @@ $(document).on('click', '.btn-remove', function(e)
 
 			ajaxCount('cart');
 		}
-
 	});
 });
 
@@ -86,7 +80,6 @@ $(document).on('click', '.wishlist-remove', function(e)
 	$.ajax({
 		url: link
 	}).done(function(res) {
-
 		if (res.message === 'success')
 		{
 			window.aa = res;
@@ -96,6 +89,5 @@ $(document).on('click', '.wishlist-remove', function(e)
 
 			ajaxCount('wishlist');
 		}
-
 	});
 });
