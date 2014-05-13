@@ -39,6 +39,7 @@
   				</ul>
 
   				<ul class="nav navbar-nav navbar-right">
+  					<li><a href="https://cartalyst.com/manual/cart">Manual</a></li>
   					@if (Sentry::check())
   					<li><a href="{{ URL::to('logout') }}">Logout</a></li>
   					@else
