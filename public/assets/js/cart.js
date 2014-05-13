@@ -43,7 +43,7 @@ $(document).on('click', '.wishlist-add', function(e)
 		url: link
 	}).done(function(res) {
 		self.removeClass('wishlist-add').addClass('wishlist-remove');
-		self.find('i').removeClass('glyphicon-star-empty').addClass('glyphicon-star');
+		self.find('i').removeClass('fa-star-o').addClass('fa-star');
 		self.attr('href', "wishlist/" + res.rowId + '/remove');
 
 		ajaxCount('wishlist');
@@ -84,7 +84,7 @@ $(document).on('click', '.wishlist-remove', function(e)
 		{
 			window.aa = res;
 			self.removeClass('wishlist-remove').addClass('wishlist-add');
-			self.find('i').removeClass('glyphicon-star').addClass('glyphicon-star-empty');
+			self.find('i').removeClass('fa-star').addClass('fa-star-o');
 			self.attr('href', "wishlist/" + res.id + '/add');
 
 			ajaxCount('wishlist');
