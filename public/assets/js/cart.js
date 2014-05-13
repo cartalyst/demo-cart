@@ -3,7 +3,7 @@ function ajaxCount(instance)
 	var target = $('.'+instance+'Count');
 
 	$.ajax({
-		url: '/'+instance+'/count'
+		url: instance+'/count'
 	}).done(function(res) {
 		target.addClass('alert-success');
 		target.text(res);
