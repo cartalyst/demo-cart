@@ -37,6 +37,7 @@
 				<td>{{{ convert_value($item->total()) }}}</td>
 				<td>
 					<a class="btn btn-danger btn-xs" href="{{ URL::to("cart/{$item->get('rowId')}/remove") }}">Delete</a>
+					<a class="btn btn-info btn-xs" href="{{ URL::to("cart/{$item->get('rowId')}/move") }}">To Wishlist</a>
 				</td>
 			</tr>
 			@endforeach

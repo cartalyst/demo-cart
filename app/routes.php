@@ -7,6 +7,7 @@ Route::group(['prefix' => 'cart'], function()
 	Route::get('/'              , 'CartController@index');
 	Route::post('/'             , 'CartController@update');
 	Route::get('{id}/add'       , 'CartController@add');
+	Route::get('{id}/move'      , 'CartController@move');
 	Route::get('{id}/addAjax'   , 'CartController@addAjax');
 	Route::get('{id}/remove'    , 'CartController@delete');
 	Route::get('{id}/removeAjax', 'CartController@deleteAjax');
@@ -19,6 +20,7 @@ Route::group(['prefix' => 'wishlist'], function()
 	Route::get('/'              , 'WishlistController@index');
 	Route::post('/'             , 'WishlistController@update');
 	Route::get('{id}/add'       , 'WishlistController@add');
+	Route::get('{id}/move'      , 'WishlistController@move');
 	Route::get('{id}/addAjax'   , 'WishlistController@addAjax');
 	Route::get('{id}/remove'    , 'WishlistController@delete');
 	Route::get('{id}/removeAjax', 'WishlistController@deleteAjax');

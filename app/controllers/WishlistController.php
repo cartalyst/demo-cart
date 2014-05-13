@@ -48,7 +48,22 @@ class WishlistController extends BaseController {
 
 		$this->addToWishlist($product);
 
-		return Redirect::back();
+		return Redirect::to('wishlist')->withSuccess("{$product->name} was successfully added to the wishlist.");
+	}
+
+	/**
+	 * Move a product to the cart.
+	 *
+	 * @param  string  $id
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function move($id)
+	{
+		$itemId = $this->wishlist->item($id)->get('id');
+
+		$this->delete($id);
+
+		return Redirect::to("cart/$itemId/add");
 	}
 
 	/**

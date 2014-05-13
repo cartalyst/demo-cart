@@ -1,6 +1,9 @@
 @extends('cart.layouts.default')
 
 @section('page')
+
+@include('partials.notifications')
+
 <table class="table table-bordered">
 	<thead>
 		<tr>
@@ -29,6 +32,7 @@
 			</td>
 			<td>
 				<a class="btn btn-danger btn-xs" href="{{ URL::to("wishlist/{$item->get('rowId')}/remove") }}">Delete</a>
+				<a class="btn btn-info btn-xs" href="{{ URL::to("wishlist/{$item->get('rowId')}/move") }}">To Cart</a>
 			</td>
 		</tr>
 		@endforeach

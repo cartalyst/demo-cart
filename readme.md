@@ -45,7 +45,7 @@ To install this demo, firstly you must be a subscriber of Cartalyst's [Arsenal](
 
 ## Demo users
 
-email: `admim@admin.com`
+email: `admin@admin.com`
 password: `password`
 
 email: `demo1@example.com`

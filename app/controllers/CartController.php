@@ -60,6 +60,21 @@ class CartController extends BaseController {
 	}
 
 	/**
+	 * Move a product to the cart.
+	 *
+	 * @param  string  $id
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function move($id)
+	{
+		$itemId = $this->cart->item($id)->get('id');
+
+		$this->delete($id);
+
+		return Redirect::to("wishlist/$itemId/add");
+	}
+
+	/**
 	 * Updates a product that is on the shopping cart.
 	 *
 	 * @return \Illuminate\Http\RedirectResponse

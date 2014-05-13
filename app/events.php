@@ -91,7 +91,10 @@ if (Sentry::check())
 
 		$cart = Sentry::getUser()->cart()->where('instance', $cart->getIdentity())->first();
 
-		$cart->items()->where('product_id', $product->id)->delete();
+		if ($cart)
+		{
+			$cart->items()->where('product_id', $product->id)->delete();
+		}
 	});
 
 	Event::listen('cartalyst.cart.cleared', function($cart)
