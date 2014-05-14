@@ -37,6 +37,7 @@ class DemoInstallCommand extends Command {
 	 */
 	public function fire()
 	{
+		$this->call('migrate');
 		$this->call('migrate:reset');
 		$this->call('migrate', ['--package' => 'cartalyst/sentry']);
 		$this->call('migrate');
