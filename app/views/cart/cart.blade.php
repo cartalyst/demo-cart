@@ -124,7 +124,7 @@
 						@foreach ($cart->conditions('coupon') as $condition)
 						<tr class="success">
 							<td colspan="4">
-								<a href="{{ URL::to('coupon/remove', $condition->get('name')) }}" class="pull-left label label-danger"><i class="glyphicon glyphicon-remove"></i></a>
+								<a href="{{ URL::to('coupon/remove', $condition->get('name')) }}" class="pull-left label label-danger"><i class="fa fa-trash-o"></i></a>
 								<span class="pull-right">{{{ $condition->get('name') }}} ({{{ $condition->get('code') }}})</span>
 							</td>
 							<td colspan="2">{{{ convert_value($condition->result()) }}}</td>
