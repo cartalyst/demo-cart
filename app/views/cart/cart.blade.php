@@ -14,7 +14,7 @@
 
 		<div class="table-responsive">
 
-			<form role="form" action="" method="post">
+			<form role="form" method="post">
 
 				<table class="table table-striped table-bordered table-hover">
 					<thead>
@@ -55,19 +55,19 @@
 							<td colspan="4">
 								<span class="pull-right">Items</span>
 							</td>
-							<td colspan="2">{{{ Cart::quantity() }}}</td>
+							<td>{{{ Cart::quantity() }}}</td>
 						</tr>
 						<tr>
 							<td colspan="4">
 								<span class="pull-right">Subtotal</span>
 							</td>
-							<td colspan="2">{{{ convert_value($cart->subtotal()) }}}</td>
+							<td>{{{ convert_value($cart->subtotal()) }}}</td>
 						</tr>
 						<tr>
 							<td colspan="4">
 								<span class="pull-right">Subtotal (with discounts)</span>
 							</td>
-							<td colspan="2">{{{ convert_value($cart->total('discount')) }}}</td>
+							<td>{{{ convert_value($cart->total('discount')) }}}</td>
 						</tr>
 
 						{{-- Items Discounts --}}
@@ -76,7 +76,7 @@
 							<td colspan="4">
 								<span class="pull-right">{{{ $name }}}</span>
 							</td>
-							<td colspan="2">{{{ convert_value($value) }}}</td>
+							<td>{{{ convert_value($value) }}}</td>
 						</tr>
 						@endforeach
 
@@ -86,7 +86,7 @@
 							<td colspan="4">
 								<span class="pull-right">{{{ $name }}}</span>
 							</td>
-							<td colspan="2">{{{ convert_value($value) }}}</td>
+							<td>{{{ convert_value($value) }}}</td>
 						</tr>
 						@endforeach
 
@@ -96,7 +96,7 @@
 							<td colspan="4">
 								<span class="pull-right">{{{ $name }}}</span>
 							</td>
-							<td colspan="2">{{{ convert_value($value) }}}</td>
+							<td>{{{ convert_value($value) }}}</td>
 						</tr>
 						@endforeach
 
@@ -106,7 +106,7 @@
 							<td colspan="4">
 								<span class="pull-right">{{{ $name }}}</span>
 							</td>
-							<td colspan="2">{{{ convert_value($value) }}}</td>
+							<td>{{{ convert_value($value) }}}</td>
 						</tr>
 						@endforeach
 
@@ -116,7 +116,7 @@
 							<td colspan="4">
 								<span class="pull-right">{{{ $name }}}</span>
 							</td>
-							<td colspan="2">{{{ convert_value($value) }}}</td>
+							<td>{{{ convert_value($value) }}}</td>
 						</tr>
 						@endforeach
 
@@ -127,7 +127,7 @@
 								<a href="{{ URL::to('coupon/remove', $condition->get('name')) }}" class="pull-left label label-danger"><i class="fa fa-trash-o"></i></a>
 								<span class="pull-right">{{{ $condition->get('name') }}} ({{{ $condition->get('code') }}})</span>
 							</td>
-							<td colspan="2">{{{ convert_value($condition->result()) }}}</td>
+							<td>{{{ convert_value($condition->result()) }}}</td>
 						</tr>
 						@endforeach
 
@@ -137,7 +137,7 @@
 							<td colspan="4">
 								<span class="pull-right">{{{ $name }}}</span>
 							</td>
-							<td colspan="2">{{{ convert_value($value) }}}</td>
+							<td>{{{ convert_value($value) }}}</td>
 						</tr>
 						@endforeach
 
@@ -145,20 +145,20 @@
 							<td colspan="4">
 								<span class="pull-right">Cart Weight</span>
 							</td>
-							<td colspan="2">{{{ Converter::value($cart->weight())->from('weight.g')->to('weight.kg')->format() }}}</td>
+							<td>{{{ Converter::value($cart->weight())->from('weight.g')->to('weight.kg')->format() }}}</td>
 						</tr>
 
 						<tr>
 							<td colspan="4">
 								<span class="pull-right">Total Usd</span>
 							</td>
-							<td colspan="2">{{{ convert_value($total) }}}</td>
+							<td>{{{ convert_value($total) }}}</td>
 						</tr>
 						<tr>
 							<td colspan="4">
 								<span class="pull-right">Total Eur</span>
 							</td>
-							<td colspan="2">{{{ Converter::value($total)->from('currency.usd')->to('currency.eur')->convert()->format() }}}</td>
+							<td>{{{ Converter::value($total)->from('currency.usd')->to('currency.eur')->convert()->format() }}}</td>
 						</tr>
 						@endif
 					</tbody>
@@ -206,4 +206,8 @@
 
 		@endif
 
-		@stop
+	</div>
+
+</div>
+
+@stop
