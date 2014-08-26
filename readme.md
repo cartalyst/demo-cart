@@ -20,19 +20,11 @@ In this demo we are covering the following:
 
 To install this demo, firstly you must be a subscriber of Cartalyst's [Arsenal](http://cartalyst.com/arsenal).
 
-1. Clone this repo:
-
-```
-git clone git@github.com:cartalyst/demo-cart.git
-```
+1. Clone this repo by running `git clone git@github.com:cartalyst/demo-cart.git` on your CLI.
 
 2. Setup your virtual host.
 
-3. Go into the directory in your terminal app and install the composer dependencies:
-
-```
-composer install
-```
+3. Go into the directory in your terminal app and install the composer dependencies by running the `composer install` command on your CLI.
 
 4. Configure your database connection.
 
