@@ -39,7 +39,7 @@ class DemoInstallCommand extends Command {
 	{
 		$this->call('migrate');
 		$this->call('migrate:reset');
-		$this->call('migrate', ['--package' => 'cartalyst/sentry']);
+		$this->call('migrate', ['--package' => 'cartalyst/sentinel']);
 		$this->call('migrate');
 		$this->call('db:seed');
 	}

@@ -41,7 +41,7 @@ Route::get('login', function()
 
 Route::post('login', function()
 {
-	if (Sentry::authenticate(Input::all()))
+	if (Sentinel::authenticate(Input::all()))
 	{
 		return Redirect::to('/');
 	}
@@ -51,7 +51,7 @@ Route::post('login', function()
 
 Route::get('logout', function()
 {
-	Sentry::logout();
+	Sentinel::logout();
 
 	return Redirect::to('/');
 });

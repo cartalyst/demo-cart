@@ -4,17 +4,16 @@
  *
  * NOTICE OF LICENSE
  *
- * Licensed under the 3-clause BSD License.
+ * Licensed under the Cartalyst PSL License.
  *
- * This source file is subject to the 3-clause BSD License that is
- * bundled with this package in the LICENSE file.  It is also available at
- * the following URL: http://www.opensource.org/licenses/BSD-3-Clause
+ * This source file is subject to the Cartalyst PSL License that is
+ * bundled with this package in the license.txt file.
  *
  * @package    Converter
- * @version    1.0.0
+ * @version    1.1.0
  * @author     Cartalyst LLC
- * @license    BSD License (3-clause)
- * @copyright  (c) 2011 - 2013, Cartalyst LLC
+ * @license    Cartalyst PSL
+ * @copyright  (c) 2011-2014, Cartalyst LLC
  * @link       http://cartalyst.com
  */
 
@@ -43,12 +42,12 @@ return array(
 		'area' => array(
 
 			'sqm' => array(
-				'format' => '1,00.00 SQM',
+				'format' => '1,00.00 sq m',
 				'unit'   => 1,
 			),
 
 			'acre' => array(
-				'format' => '1,00.000 Acres',
+				'format' => '1,00.000 ac',
 				'unit'   => 0.000247105,
 			),
 
@@ -67,12 +66,10 @@ return array(
 
 			'usd' => array(
 				'format' => '$1,0.00',
-				'negative' => '($1,0.00) neg',
 			),
 
 			'eur' => array(
 				'format' => '&euro;1,0.00',
-				'unit'   => '0.78'
 			),
 
 			'gbp' => array(
@@ -93,23 +90,38 @@ return array(
 		'length' => array(
 
 			'km' => array(
-				'format' => '1,0.00 KM',
-				'unit'   => 1.00,
+				'format' => '1,0.000 km',
+				'unit'   => 0.001,
+			),
+
+			'mi' => array(
+				'format' => '1,0.000 mi.',
+				'unit'   => 0.000621371,
 			),
 
 			'm' => array(
-				'format' => '1,0.00 M',
-				'unit'   => 1000,
+				'format' => '1,0.000 m',
+				'unit'   => 1.00,
 			),
 
 			'cm' => array(
-				'format' => '1,0.00 CM',
-				'unit'   => 100000,
+				'format' => '1!0 cm',
+				'unit'   => 100,
 			),
 
 			'mm' => array(
-				'format' => '1,0.00 MM',
-				'unit'   => 1000000,
+				'format' => '1,0.00 mm',
+				'unit'   => 1000,
+			),
+
+			'ft' => array(
+				'format' => '1,0.00 ft.',
+				'unit'   => 3.28084,
+			),
+
+			'in' => array(
+				'format' => '1,0.00 in.',
+				'unit'   => 39.3701,
 			),
 
 		),
@@ -126,12 +138,12 @@ return array(
 		'weight' => array(
 
 			'kg' => array(
-				'format' => '1,0.00 KG',
+				'format' => '1,0.00 kg',
 				'unit'   => 1.00,
 			),
 
 			'g' => array(
-				'format' => '1,0.00 G',
+				'format' => '1,0.00 g',
 				'unit'   => 1000.00,
 			),
 

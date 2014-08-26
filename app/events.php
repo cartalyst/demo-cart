@@ -4,7 +4,7 @@ use App\Models\Cart as CartModel;
 use App\Models\Product;
 use Illuminate\Support\Collection;
 
-Event::listen('sentry.authenticated', function($user)
+Event::listen('sentinel.authenticated', function($user)
 {
 	$items = array();
 
@@ -30,9 +30,11 @@ Event::listen('sentry.authenticated', function($user)
 
 	$instance = Cart::getIdentity();
 
-	if ( ! $cart = Sentry::getUser()->cart()->where('instance', $instance)->first())
+	$user = Sentinel::getUser();
+
+	if ( ! $cart = $user->cart()->where('instance', $instance)->first())
 	{
-		$cart = Sentry::getUser()->cart()->create(compact('instance'));
+		$cart = $user->cart()->create(compact('instance'));
 	}
 
 	foreach (Cart::items() as $item)
@@ -56,16 +58,17 @@ Event::listen('sentry.authenticated', function($user)
 });
 
 # this check can and should be done on each event listener
-if (Sentry::check())
+if (Sentinel::check())
 {
 	Event::listen('cartalyst.cart.added', function($item, $cart)
 	{
 		$product  = Product::find($item->get('id'));
-		$instance = $cart->getIdentity();
 
-		if ( ! $cart = Sentry::getUser()->cart()->where('instance', $instance)->first())
+		$user = Sentinel::getUser();
+
+		if ( ! $cart = $user->cart()->where('instance', $cart->getIdentity())->first())
 		{
-			$cart = Sentry::getUser()->cart()->create(compact('instance'));
+			$cart = $user->cart()->create(compact('instance'));
 		}
 
 		$cart->items()->create(array(
@@ -78,7 +81,7 @@ if (Sentry::check())
 	{
 		$product = Product::find($item->get('id'));
 
-		$cart = Sentry::getUser()->cart()->where('instance', $cart->getIdentity())->first();
+		$cart = Sentinel::getUser()->cart()->where('instance', $cart->getIdentity())->first();
 
 		$cart->items()->where('product_id', $product->id)->update(array(
 			'quantity' => $item->get('quantity')
@@ -89,7 +92,7 @@ if (Sentry::check())
 	{
 		$product = Product::find($item->get('id'));
 
-		$cart = Sentry::getUser()->cart()->where('instance', $cart->getIdentity())->first();
+		$cart = Sentinel::getUser()->cart()->where('instance', $cart->getIdentity())->first();
 
 		if ($cart)
 		{
@@ -99,7 +102,7 @@ if (Sentry::check())
 
 	Event::listen('cartalyst.cart.cleared', function($cart)
 	{
-		Sentry::getUser()->cart()->where('instance', $cart->getIdentity())->first()->items()->delete();
+		Sentinel::getUser()->cart()->where('instance', $cart->getIdentity())->first()->items()->delete();
 	});
 
 }

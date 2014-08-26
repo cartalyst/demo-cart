@@ -6,9 +6,9 @@
 	"require": {
 		"laravel/framework": "4.1.*",
 		"cartalyst/cart": "1.0.*",
-		"cartalyst/converter": "1.0.*",
-		"cartalyst/sentry": "~3",
-		"fzaninotto/faker" : "*"
+		"cartalyst/converter": "1.1.*",
+		"cartalyst/sentinel": "1.0.*",
+		"fzaninotto/faker" : "1.4.*"
 	},
 	"repositories": [
 		{
@@ -42,5 +42,5 @@
 	"config": {
 		"preferred-install": "dist"
 	},
-	"minimum-stability": "dev"
+	"minimum-stability": "stable"
 }
