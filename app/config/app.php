@@ -13,7 +13,7 @@ return array(
 	|
 	*/
 
-	'debug' => false,
+	'debug' => true,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -120,9 +120,9 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
-		'Cartalyst\Sentry\Laravel\SentryServiceProvider',
 		'Cartalyst\Cart\Laravel\CartServiceProvider',
 		'Cartalyst\Converter\Laravel\ConverterServiceProvider',
+		'Cartalyst\Sentinel\Laravel\SentinelServiceProvider',
 
 	),
 
@@ -190,7 +190,7 @@ return array(
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
 
-		'Sentry'    => 'Cartalyst\Sentry\Laravel\Facades\Sentry',
+		'Sentinel'  => 'Cartalyst\Sentinel\Laravel\Facades\Sentinel',
 		'Cart'      => 'Cartalyst\Cart\Laravel\Facades\Cart',
 		'Converter' => 'Cartalyst\Converter\Laravel\Facades\Converter',
 
