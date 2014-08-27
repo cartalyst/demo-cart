@@ -90,7 +90,7 @@ class UserEventHandler {
 	/**
 	 * Listen to the events.
 	 *
-	 * @param  Illuminate\Events\Dispatcher  $dispatcher
+	 * @param  \Illuminate\Events\Dispatcher  $dispatcher
 	 * @return void
 	 */
 	public function subscribe(Dispatcher $dispatcher)
