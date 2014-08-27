@@ -4,7 +4,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class CartItem extends Model {
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public $table = 'carts_items';
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public $fillable = [
+		'product_id',
+		'quantity',
+	];
 
 	public function product()
 	{
