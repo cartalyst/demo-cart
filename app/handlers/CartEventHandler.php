@@ -2,9 +2,9 @@
 
 use App\Models\Product;
 use Cartalyst\Cart\Cart;
+use Cartalyst\Sentinel\Sentinel;
 use Illuminate\Events\Dispatcher;
 use Cartalyst\Cart\Collections\ItemCollection;
-use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 
 class CartEventHandler {
 
@@ -18,11 +18,29 @@ class CartEventHandler {
 	/**
 	 * Constructor.
 	 *
+	 * @param  \Cartalyst\Sentinel\Sentinel  $sentinel
 	 * @return void
 	 */
-	public function __construct()
+	public function __construct(Sentinel $sentinel)
 	{
-		$this->user = Sentinel::getUser();
+		$this->user = $sentinel->getUser();
+	}
+
+	/**
+	 * Listen to the events.
+	 *
+	 * @param  \Illuminate\Events\Dispatcher  $dispatcher
+	 * @return void
+	 */
+	public function subscribe(Dispatcher $dispatcher)
+	{
+		$dispatcher->listen('cartalyst.cart.added', __CLASS__.'@onItemAdded');
+
+		$dispatcher->listen('cartalyst.cart.updated', __CLASS__.'@onItemUpdated');
+
+		$dispatcher->listen('cartalyst.cart.removed', __CLASS__.'@onItemRemoved');
+
+		$dispatcher->listen('cartalyst.cart.cleared', __CLASS__.'@onCartCleared');
 	}
 
 	/**
@@ -73,7 +91,7 @@ class CartEventHandler {
 		$product = Product::find($item->get('id'));
 
 		// Remove the product from the database
-		$this->findCart($cart->getIdentity())->items()->whereProductId($product->id)->delete();
+		$this->cart($cart->getIdentity())->items()->whereProductId($product->id)->delete();
 	}
 
 	/**
@@ -88,24 +106,7 @@ class CartEventHandler {
 		if ( ! $this->user) return;
 
 		// Remove all the items from the database
-		$this->findCart($cart->getIdentity())->items()->delete();
-	}
-
-	/**
-	 * Listen to the events.
-	 *
-	 * @param  \Illuminate\Events\Dispatcher  $dispatcher
-	 * @return void
-	 */
-	public function subscribe(Dispatcher $dispatcher)
-	{
-		$dispatcher->listen('cartalyst.cart.added', 'App\Handlers\CartEventHandler@onItemAdded');
-
-		$dispatcher->listen('cartalyst.cart.updated', 'App\Handlers\CartEventHandler@onItemUpdated');
-
-		$dispatcher->listen('cartalyst.cart.removed', 'App\Handlers\CartEventHandler@onItemRemoved');
-
-		$dispatcher->listen('cartalyst.cart.cleared', 'App\Handlers\CartEventHandler@onCartCleared');
+		$this->cart($cart->getIdentity())->items()->delete();
 	}
 
 	/**
@@ -114,7 +115,7 @@ class CartEventHandler {
 	 * @param  string  $instance
 	 * @return \App\Models\Cart
 	 */
-	protected function findCart($instance)
+	protected function cart($instance)
 	{
 		if ( ! $cart = $this->user->cart()->whereInstance($instance)->first())
 		{
@@ -137,7 +138,7 @@ class CartEventHandler {
 		$product = Product::find($item->get('id'));
 
 		// Get the cart from storage that belongs to the instance
-		$_cart = $this->findCart($cart->getIdentity());
+		$_cart = $this->cart($cart->getIdentity());
 
 		// Does the product exist on storage?
 		if ( ! $_item = $_cart->items()->whereProductId($product->id)->first())

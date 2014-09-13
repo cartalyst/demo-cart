@@ -53,6 +53,12 @@
 						@endforeach
 						<tr>
 							<td colspan="4">
+								<span class="pull-right">Products</span>
+							</td>
+							<td>{{{ Cart::items()->count() }}}</td>
+						</tr>
+						<tr>
+							<td colspan="4">
 								<span class="pull-right">Items</span>
 							</td>
 							<td>{{{ Cart::quantity() }}}</td>

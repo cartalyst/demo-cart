@@ -1,9 +1,10 @@
 <?php namespace App\Handlers;
 
+use Cartalyst\Cart\Cart;
+use Cartalyst\Sentinel\Sentinel;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Support\Collection;
 use Cartalyst\Sentinel\Users\EloquentUser;
-use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 
 class UserEventHandler {
 
@@ -17,74 +18,17 @@ class UserEventHandler {
 	/**
 	 * Constructor.
 	 *
+	 * @param  \Cartalyst\Cart\Cart  $cart
+	 * @param  \Cartalyst\Sentinel\Sentinel  $sentinel
 	 * @return void
 	 */
-	public function __construct()
+	public function __construct(Cart $cart, Sentinel $sentinel)
 	{
-		$this->user = Sentinel::getUser();
-	}
+		$this->cart = $cart;
 
-	/**
-	 * When a user logs in.
-	 *
-	 * @param  \Cartalyst\Sentinel\Users\EloquentUser  $user
-	 * @return void
-	 */
-	public function onUserAuthenticated(EloquentUser $user)
-	{
-		// Get the main cart instance
-		$cart = app('cart');
+		$this->wishlist = app('wishlist');
 
-		// Get the wishlist cart instance
-		$wishlist = app('wishlist');
-
-		$items = [];
-
-		foreach ($user->cart as $_cart)
-		{
-			foreach ($_cart->items as $item)
-			{
-				$id = $item->product->id;
-
-				$search = $cart->find(compact('id'));
-
-				if (count($search) === 0)
-				{
-					$items[$_cart->instance][] = [
-						'id'       => $id,
-						'name'     => $item->product->name,
-						'price'    => $item->product->price,
-						'quantity' => 1,
-					];
-				}
-			}
-		}
-
-		$instance = $cart->getIdentity();
-
-		if ( ! $_cart = $this->user->cart()->whereInstance($instance)->first())
-		{
-			$_cart = $this->user->cart()->create(compact('instance'));
-		}
-
-		foreach ($_cart->items() as $item)
-		{
-			$id = $item->get('id');
-
-			if ( ! $_cart->items()->where('product_id', $id)->first())
-			{
-				$_cart->items()->create([
-					'product_id' => $id,
-					'quantity'   => $item->get('quantity'),
-				]);
-			}
-		}
-
-		// Sync the main Cart
-		$cart->sync(new Collection(array_get($items, 'main', [])));
-
-		// Sync the wishlist
-		$wishlist->sync(new Collection(array_get($items, 'wishlist', [])));
+		$this->user = $sentinel->getUser();
 	}
 
 	/**
@@ -95,7 +39,92 @@ class UserEventHandler {
 	 */
 	public function subscribe(Dispatcher $dispatcher)
 	{
-		$dispatcher->listen('sentinel.authenticated', 'App\Handlers\UserEventHandler@onUserAuthenticated');
+		$dispatcher->listen('sentinel.authenticated', __CLASS__.'@onUserAuthenticated');
+	}
+
+	/**
+	 * When a user logs in.
+	 *
+	 * @param  \Cartalyst\Sentinel\Users\EloquentUser  $user
+	 * @return void
+	 */
+	public function onUserAuthenticated(EloquentUser $user)
+	{
+		$this->syncFromDatabase();
+
+		$this->syncToDatabase();
+	}
+
+	protected function cart()
+	{
+		// Make sure that the cart instance is stored
+		$instance = $this->cart->getIdentity();
+
+		if ( ! $cart = $this->user->cart()->whereInstance($instance)->first())
+		{
+			$cart = $this->user->cart()->create(compact('instance'));
+		}
+
+		return $cart;
+	}
+
+	// Syncs the items we have on the database to the cart
+	protected function syncFromDatabase()
+	{
+		$cart = $this->cart();
+
+		$items = [];
+
+		foreach ($this->user->cart as $cart)
+		{
+			foreach ($cart->items as $item)
+			{
+				$id = $item->product->id;
+
+				$_item = $this->cart->find(compact('id'));
+
+				if (count($_item) === 0)
+				{
+					$items[$cart->instance][] = [
+						'id'       => $id,
+						'name'     => $item->product->name,
+						'price'    => $item->product->price,
+						'quantity' => $item->quantity,
+					];
+				}
+			}
+		}
+
+		// Sync the main Cart
+		$this->cart->sync(new Collection(array_get($items, 'main', [])));
+
+		// Sync the wishlist
+		$this->wishlist->sync(new Collection(array_get($items, 'wishlist', [])));
+	}
+
+	// Syncs the items we have on the cart to the database
+	protected function syncToDatabase()
+	{
+		$cart = $this->cart();
+
+		foreach ($this->cart->items() as $item)
+		{
+			$id = $item->get('id');
+
+			if ( ! $_item = $cart->items()->where('product_id', $id)->first())
+			{
+				$cart->items()->create([
+					'product_id' => $id,
+					'quantity'   => $item->get('quantity'),
+				]);
+			}
+			else
+			{
+				$_item->update([
+					'quantity' => $item->get('quantity'),
+				]);
+			}
+		}
 	}
 
 }
