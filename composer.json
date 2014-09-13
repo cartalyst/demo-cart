@@ -5,10 +5,10 @@
 	"license": "MIT",
 	"require": {
 		"laravel/framework": "4.2.*",
-		"cartalyst/cart": "1.0.*",
-		"cartalyst/converter": "1.1.*",
-		"cartalyst/sentinel": "1.0.*",
-		"fzaninotto/faker" : "1.4.*"
+		"cartalyst/cart": "~1.0",
+		"cartalyst/converter": "~1.1",
+		"cartalyst/sentinel": "~1.0",
+		"fzaninotto/faker" : "~1.4"
 	},
 	"repositories": [
 		{
