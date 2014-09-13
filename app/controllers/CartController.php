@@ -17,6 +17,7 @@ class CartController extends BaseController {
 	/**
 	 * Constructor.
 	 *
+	 * @param  \Cartalyst\Cart\Cart  $cart
 	 * @return void
 	 */
 	public function __construct(Cart $cart)
