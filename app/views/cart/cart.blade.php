@@ -53,6 +53,12 @@
 						@endforeach
 						<tr>
 							<td colspan="4">
+								<span class="pull-right">Products</span>
+							</td>
+							<td>{{{ Cart::items()->count() }}}</td>
+						</tr>
+						<tr>
+							<td colspan="4">
 								<span class="pull-right">Items</span>
 							</td>
 							<td>{{{ Cart::quantity() }}}</td>
@@ -174,10 +180,9 @@
 
 			</form>
 
-
 			{{-- Apply a Coupon --}}
 			@if ( ! $items->isEmpty() && ! $coupon)
-
+			<br />
 			{{ Form::open(array('route' => 'applyCoupon')) }}
 
 			<div class="row">

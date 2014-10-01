@@ -1,6 +1,6 @@
 <?php
 
-class User extends Cartalyst\Sentry\Users\EloquentUser {
+class User extends Cartalyst\Sentinel\Users\EloquentUser {
 
 	public function cart()
 	{

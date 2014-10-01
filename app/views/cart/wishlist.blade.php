@@ -6,7 +6,7 @@
 
 <div class="page-header">
 	<h1>Wishlist? No problem!</h1>
-	<p class="lead">Cart supports multiple cart instances, so that you can have as many shopping cart instances on the same page as you want without any conflicts.</p>
+	<p class="lead">Cart supports multiple cart instances, so that you can have as many shopping cart instances on the same application without any conflicts.</p>
 </div>
 
 <div class="row">

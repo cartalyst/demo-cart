@@ -29,7 +29,7 @@ class CreateDefaultUsersSeeder extends Seeder {
 
 		foreach ($users as $user)
 		{
-			Sentry::registerAndActivate($user);
+			Sentinel::registerAndActivate($user);
 		}
 	}
 

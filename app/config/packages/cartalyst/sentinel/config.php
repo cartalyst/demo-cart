@@ -1,76 +1,120 @@
 <?php
 /**
- * Part of the Sentry package.
+ * Part of the Sentinel package.
  *
  * NOTICE OF LICENSE
  *
- * Licensed under the 3-clause BSD License.
+ * Licensed under the Cartalyst PSL License.
  *
- * This source file is subject to the 3-clause BSD License that is
- * bundled with this package in the LICENSE file.  It is also available at
- * the following URL: http://www.opensource.org/licenses/BSD-3-Clause
+ * This source file is subject to the Cartalyst PSL License that is
+ * bundled with this package in the license.txt file.
  *
- * @package    Sentry
- * @version    3.0.0
+ * @package    Sentinel
+ * @version    1.0.0
  * @author     Cartalyst LLC
- * @license    BSD License (3-clause)
- * @copyright  (c) 2011 - 2013, Cartalyst LLC
+ * @license    Cartalyst PSL
+ * @copyright  (c) 2011-2014, Cartalyst LLC
  * @link       http://cartalyst.com
  */
 
-return array(
+return [
 
 	/*
 	|--------------------------------------------------------------------------
 	| Session Key
 	|--------------------------------------------------------------------------
 	|
-	| Please provide your session key for Sentry.
+	| Please provide your session key for Sentinel.
 	|
 	*/
 
-	'session' => 'cartalyst_sentry',
+	'session' => 'cartalyst_sentinel',
 
 	/*
 	|--------------------------------------------------------------------------
 	| Cookie Key
 	|--------------------------------------------------------------------------
 	|
-	| Please provide your cookie key for Sentry.
+	| Please provide your cookie key for Sentinel.
 	|
 	*/
 
-	'cookie' => 'cartalyst_sentry',
+	'cookie' => 'cartalyst_sentinel',
 
 	/*
 	|--------------------------------------------------------------------------
 	| Users
 	|--------------------------------------------------------------------------
 	|
-	| Please provide the user model used in Sentry.
+	| Please provide the user model used in Sentinel.
 	|
 	*/
 
-	'users' => array(
+	'users' => [
 
 		'model' => 'User',
 
-	),
+	],
 
 	/*
 	|--------------------------------------------------------------------------
-	| Groups
+	| Roles
 	|--------------------------------------------------------------------------
 	|
-	| Please provide the group model used in Sentry.
+	| Please provide the role model used in Sentinel.
 	|
 	*/
 
-	'groups' => array(
+	'roles' => [
 
-		'model' => 'Cartalyst\Sentry\Groups\EloquentGroup',
+		'model' => 'Cartalyst\Sentinel\Roles\EloquentRole',
 
-	),
+	],
+
+	/*
+	|--------------------------------------------------------------------------
+	| Permissions
+	|--------------------------------------------------------------------------
+	|
+	| Here you may specify the permissions class. Sentinel ships with two
+	| permission types.
+	|
+	| 'Cartalyst\Sentinel\Permissions\StrictPermissions'
+	| 'Cartalyst\Sentinel\Permissions\StandardPermissions'
+	|
+	| "StandardPermissions" will assign a higher priority to the user
+	| permissions over role permissions, once a user is allowed or denied
+	| a specific permission, it will be used regardless of the
+	| permissions set on the role.
+	|
+	| "StrictPermissions" will deny any permission as soon as it finds it
+	| rejected on either the user or any of the assigned roles.
+	|
+	*/
+
+	'permissions' => [
+
+		'class' => 'Cartalyst\Sentinel\Permissions\StandardPermissions',
+
+	],
+
+	/*
+	|--------------------------------------------------------------------------
+	| Persistences
+	|--------------------------------------------------------------------------
+	|
+	| Here you may specify the persistences model used and weather to use the
+	| single persistence mode.
+	|
+	*/
+
+	'persistences' => [
+
+		'model' => 'Cartalyst\Sentinel\Persistences\EloquentPersistence',
+
+		'single' => false,
+
+	],
 
 	/*
 	|--------------------------------------------------------------------------
@@ -80,18 +124,18 @@ return array(
 	| When logging in, checking for existing sessions and failed logins occur,
 	| you may configure an indefinite number of "checkpoints". These are
 	| classes which may respond to each event and handle accordingly.
-	| We ship with three, an activation checkpoint, SwiftIdentity
-	| two-factor authentication checkpoint and a throttling
+	| We ship with two, a throttling checkpoint and an activation
 	| checkpoint. Feel free to add, remove or re-order
 	| these.
 	|
 	*/
 
-	'checkpoints' => array(
-		'activation',
+	'checkpoints' => [
+
 		'throttle',
-		// 'swift',
-	),
+		'activation',
+
+	],
 
 	/*
 	|--------------------------------------------------------------------------
@@ -100,17 +144,20 @@ return array(
 	|
 	| Here you may specify the activations model used and the time (in seconds)
 	| which activation codes expire. By default, activation codes expire after
-	| three days.
+	| three days. The lottery is used for garbage collection, expired
+	| codes will be cleared automatically based on the provided odds.
 	|
 	*/
 
-	'activations' => array(
+	'activations' => [
 
-		'model' => 'Cartalyst\Sentry\Activations\EloquentActivation',
+		'model' => 'Cartalyst\Sentinel\Activations\EloquentActivation',
 
 		'expires' => 259200,
 
-	),
+		'lottery' => [2, 100],
+
+	],
 
 	/*
 	|--------------------------------------------------------------------------
@@ -119,17 +166,20 @@ return array(
 	|
 	| Here you may specify the reminders model used and the time (in seconds)
 	| which reminder codes expire. By default, reminder codes expire
-	| after four hours.
+	| after four hours. The lottery is used for garbage collection, expired
+	| codes will be cleared automatically based on the provided odds.
 	|
 	*/
 
-	'reminders' => array(
+	'reminders' => [
 
-		'model' => 'Cartalyst\Sentry\Reminders\EloquentReminder',
+		'model' => 'Cartalyst\Sentinel\Reminders\EloquentReminder',
 
 		'expires' => 14400,
 
-	),
+		'lottery' => [2, 100],
+
+	],
 
 	/*
 	|--------------------------------------------------------------------------
@@ -139,14 +189,14 @@ return array(
 	| Here, you may configure your site's throttling settings. There are three
 	| types of throttling.
 	|
-	| The first type is "global". Global throttling will monitor the overal
-	| failed login attemps across your site and can limit the affects of an
+	| The first type is "global". Global throttling will monitor the overall
+	| failed login attempts across your site and can limit the effects of an
 	| attempted DDoS attack.
 	|
 	| The second type is "ip". This allows you to throttle the failed login
-	| attemps (across any account) of a given IP address.
+	| attempts (across any account) of a given IP address.
 	|
-	| The third type is "user". This allows you to throttle the login attemps
+	| The third type is "user". This allows you to throttle the login attempts
 	| on an individual user account.
 	|
 	| Each type of throttling has the same options. The first is the interval.
@@ -159,89 +209,55 @@ return array(
 	| the next attempt can occur.
 	|
 	| The second way is by providing an integer. If the number of failed login
-	| attempts outweight the thresholds integer, that throttle is locked until
+	| attempts outweigh the thresholds integer, that throttle is locked until
 	| there are no more failed login attempts within the specified interval.
 	|
 	| On this premise, we encourage you to use array thresholds for global
-	| throttling (and perhapse IP throttling as well), so as to not lock your
+	| throttling (and perhaps IP throttling as well), so as to not lock your
 	| whole site out for minutes on end because it's being DDoS'd. However,
 	| for user throttling, locking a single account out because somebody is
 	| attempting to breach it could be an appropriate response.
 	|
-	| You may use any type of throtttling for any scenario, and the specific
+	| You may use any type of throttling for any scenario, and the specific
 	| configurations are designed to be customized as your site grows.
 	|
 	*/
 
-	'throttling' => array(
+	'throttling' => [
 
-		'model' => 'Cartalyst\Sentry\Throttling\EloquentThrottle',
+		'model' => 'Cartalyst\Sentinel\Throttling\EloquentThrottle',
 
-		'global' => array(
+		'global' => [
 
 			'interval' => 900,
 
-			'thresholds' => array(
+			'thresholds' => [
 				10 => 1,
 				20 => 2,
 				30 => 4,
-				50 => 8,
+				40 => 8,
 				50 => 16,
 				60 => 12
-			),
+			],
 
-		),
+		],
 
-		'ip' => array(
-
-			'interval' => 900,
-
-			'thresholds' => 5,
-
-		),
-
-		'user' => array(
+		'ip' => [
 
 			'interval' => 900,
 
 			'thresholds' => 5,
 
-		),
+		],
 
-	),
+		'user' => [
 
-	/*
-	|--------------------------------------------------------------------------
-	| Swift Identity (http://www.swiftidentity.com)
-	|--------------------------------------------------------------------------
-	|
-	| Swift Identity is a free two factor authentication service. Two factor
-	| authentication is an approach where a second device must approve each
-	| login, so that if passwords are breached, unless the device is also
-	| stolen, a login cannot occur. This is a very secure way of
-	| protecting those users who use common passwords against
-	| themselves.
-	|
-	| At this stage, Sentry supports Swift Identity using either "swipe" or
-	| "sms" methods. You must also provide your developer account email,
-	| password, API key and app code.
-	|
-	| See http://www.swiftidentity.com/solutions/php-toolkit for more.
-	|
-	*/
+			'interval' => 900,
 
-	'swift' => array(
+			'thresholds' => 5,
 
-		'method' => 'swipe',
+		],
 
-		'email' => null,
+	],
 
-		'password' => null,
-
-		'api_key' => null,
-
-		'app_code' => null,
-
-	),
-
-);
+];

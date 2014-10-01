@@ -4,6 +4,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cart extends Model {
 
+	/**
+	 * {@inheritDoc}
+	 */
+	public $fillable = [
+		'instance',
+	];
+
 	public function delete()
 	{
 		$this->items()->delete();

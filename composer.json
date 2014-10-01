@@ -4,11 +4,11 @@
 	"keywords": ["framework", "laravel"],
 	"license": "MIT",
 	"require": {
-		"laravel/framework": "4.1.*",
-		"cartalyst/cart": "1.0.*",
-		"cartalyst/converter": "1.0.*",
-		"cartalyst/sentry": "~3",
-		"fzaninotto/faker" : "*"
+		"laravel/framework": "4.2.*",
+		"cartalyst/cart": "~1.0",
+		"cartalyst/converter": "~1.1",
+		"cartalyst/sentinel": "~1.0",
+		"fzaninotto/faker" : "~1.4"
 	},
 	"repositories": [
 		{
@@ -20,6 +20,7 @@
 		"classmap": [
 			"app/commands",
 			"app/controllers",
+			"app/handlers",
 			"app/models",
 			"app/database/migrations",
 			"app/database/seeds",
@@ -42,5 +43,5 @@
 	"config": {
 		"preferred-install": "dist"
 	},
-	"minimum-stability": "dev"
+	"minimum-stability": "stable"
 }

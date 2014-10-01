@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Product;
+use Cartalyst\Cart\Cart;
 use Cartalyst\Conditions\Condition;
 use Illuminate\Support\SerializableClosure;
 
@@ -16,11 +17,12 @@ class CartController extends BaseController {
 	/**
 	 * Constructor.
 	 *
+	 * @param  \Cartalyst\Cart\Cart  $cart
 	 * @return void
 	 */
-	public function __construct()
+	public function __construct(Cart $cart)
 	{
-		$this->cart = app('cart');
+		$this->cart = $cart;
 	}
 
 	/**
