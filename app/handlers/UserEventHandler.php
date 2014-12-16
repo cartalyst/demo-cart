@@ -58,7 +58,7 @@ class UserEventHandler {
 	protected function cart()
 	{
 		// Make sure that the cart instance is stored
-		$instance = $this->cart->getIdentity();
+		$instance = $this->cart->getInstance();
 
 		if ( ! $cart = $this->user->cart()->whereInstance($instance)->first())
 		{
