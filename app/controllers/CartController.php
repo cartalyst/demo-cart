@@ -238,6 +238,23 @@ class CartController extends BaseController {
 	 */
 	protected function addToCart($product)
 	{
+		// Set the global conditions order
+		$this->cart->setConditionsOrder([
+			'discount',
+			'other',
+			'tax',
+			'shipping',
+			'coupon',
+		]);
+
+		// Set the items conditions order
+		$this->cart->setItemsConditionsOrder([
+			'discount',
+			'other',
+			'tax',
+			'shipping',
+		]);
+
 		// Item conditions
 		$condition1 = $this->createCondition('VAT (17.5%)', 'tax', 'subtotal', ['value' => '17.50%']);
 		$condition2 = $this->createCondition('VAT (23%)', 'tax', 'subtotal', ['value' => '23%']);
@@ -260,23 +277,6 @@ class CartController extends BaseController {
 
 		// Set the global conditions
 		$this->cart->condition([$condition1, $condition2, $condition3]);
-
-		// Set the global conditions order
-		$this->cart->setConditionsOrder([
-			'discount',
-			'other',
-			'tax',
-			'shipping',
-			'coupon',
-		]);
-
-		// Set the items conditions order
-		$this->cart->setItemsConditionsOrder([
-			'discount',
-			'other',
-			'tax',
-			'shipping',
-		]);
 
 		return $item;
 	}

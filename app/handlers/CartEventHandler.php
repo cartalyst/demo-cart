@@ -91,7 +91,7 @@ class CartEventHandler {
 		$product = Product::find($item->get('id'));
 
 		// Remove the product from the database
-		$this->cart($cart->getIdentity())->items()->whereProductId($product->id)->delete();
+		$this->cart($cart->getInstance())->items()->whereProductId($product->id)->delete();
 	}
 
 	/**
@@ -106,7 +106,7 @@ class CartEventHandler {
 		if ( ! $this->user) return;
 
 		// Remove all the items from the database
-		$this->cart($cart->getIdentity())->items()->delete();
+		$this->cart($cart->getInstance())->items()->delete();
 	}
 
 	/**
@@ -138,7 +138,7 @@ class CartEventHandler {
 		$product = Product::find($item->get('id'));
 
 		// Get the cart from storage that belongs to the instance
-		$_cart = $this->cart($cart->getIdentity());
+		$_cart = $this->cart($cart->getInstance());
 
 		// Does the product exist on storage?
 		if ( ! $_item = $_cart->items()->whereProductId($product->id)->first())
