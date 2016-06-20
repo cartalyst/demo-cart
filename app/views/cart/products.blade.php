@@ -10,7 +10,7 @@
 	<h1>Cart</h1>
 	<p class="lead">A modern and framework agnostic shopping cart package featuring multiple instances, item attributes and <a href="https://www.cartalyst.com/manual/conditions" target="_blank">Conditions</a>.</p>
 	<p class="lead">
-		<a href="https://github.com/cartalyst/demo-cart" class="btn btn-lg btn-default"><i class="fa fa-github"></i> Github</a>
+		<a href="https://github.com/cartalyst/demo-cart" class="btn btn-lg btn-default"><i class="fa fa-github"></i> GitHub</a>
 		<a href="https://cartalyst.com/manual/cart" class="btn btn-lg btn-default"><i class="fa fa-file-text-o"></i> Manual</a>
 	</p>
 </div>
