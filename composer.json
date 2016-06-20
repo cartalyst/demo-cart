@@ -13,7 +13,7 @@
 	"repositories": [
 		{
 			"type": "composer",
-			"url": "http://packages.cartalyst.com"
+			"url": "https://packages.cartalyst.com"
 		}
 	],
 	"autoload": {
