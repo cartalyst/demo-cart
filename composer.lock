@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1baa097ee27aefab2669473a0720ef42",
+    "hash": "85cdcf3ae47485a8ecc289fd59fbac87",
     "content-hash": "1c30c3280480cc049621d21e3d502e50",
     "packages": [
         {
             "name": "cartalyst/cart",
-            "version": "v2.0.1",
+            "version": "v2.0.2",
             "source": {
                 "type": "git",
                 "url": "git@github.com:cartalyst/cart.git",
-                "reference": "e7ae11ea1f73a83a36843e43540c76e04252e190"
+                "reference": "18e686ca1d78b53580f1aef68365126976e688fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cartalyst/cart/zipball/e7ae11ea1f73a83a36843e43540c76e04252e190",
-                "reference": "e7ae11ea1f73a83a36843e43540c76e04252e190",
+                "url": "https://api.github.com/repos/cartalyst/cart/zipball/18e686ca1d78b53580f1aef68365126976e688fd",
+                "reference": "18e686ca1d78b53580f1aef68365126976e688fd",
                 "shasum": ""
             },
             "require": {
@@ -54,27 +54,8 @@
             "authors": [
                 {
                     "name": "Cartalyst LLC",
-                    "email": "help@cartalyst.com"
-                },
-                {
-                    "name": "Ben Corlett",
-                    "email": "ben.corlett@cartalyst.com",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Bruno Gaspar",
-                    "email": "bruno.gaspar@cartalyst.com",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Dan Syme",
-                    "email": "dan.syme@cartalyst.com",
-                    "role": "Project Lead"
-                },
-                {
-                    "name": "Suhayb Wardany",
-                    "email": "su.wardany@cartalyst.com",
-                    "role": "Developer"
+                    "email": "help@cartalyst.com",
+                    "homepage": "https://cartalyst.com"
                 }
             ],
             "description": "Shopping cart package featuring multiple cart instances, item attributes and Conditions.",
@@ -87,10 +68,10 @@
                 "shopping"
             ],
             "support": {
-                "source": "https://github.com/cartalyst/cart/tree/v2.0.1",
+                "source": "https://github.com/cartalyst/cart/tree/v2.0.2",
                 "issues": "https://github.com/cartalyst/cart/issues"
             },
-            "time": "2015-07-28 21:21:13"
+            "time": "2016-06-28 14:39:13"
         },
         {
             "name": "cartalyst/collections",
@@ -413,16 +394,16 @@
         },
         {
             "name": "cartalyst/support",
-            "version": "v1.1.2",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cartalyst/support.git",
-                "reference": "c90931d25e89734ba89875a769af6b2e050593a5"
+                "reference": "feab60d8190ccce376e67c161b5c0559574b9832"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cartalyst/support/zipball/c90931d25e89734ba89875a769af6b2e050593a5",
-                "reference": "c90931d25e89734ba89875a769af6b2e050593a5",
+                "url": "https://api.github.com/repos/cartalyst/support/zipball/feab60d8190ccce376e67c161b5c0559574b9832",
+                "reference": "feab60d8190ccce376e67c161b5c0559574b9832",
                 "shasum": ""
             },
             "require": {
@@ -438,7 +419,7 @@
             "extra": {
                 "component": "package",
                 "branch-alias": {
-                    "dev-master": "1.1.x-dev"
+                    "dev-master": "1.2.x-dev"
                 }
             },
             "autoload": {
@@ -478,10 +459,10 @@
                 "support"
             ],
             "support": {
-                "source": "https://github.com/cartalyst/support/tree/v1.1.2",
+                "source": "https://github.com/cartalyst/support/tree/master",
                 "issues": "https://github.com/cartalyst/support/issues"
             },
-            "time": "2015-06-24 13:00:53"
+            "time": "2016-06-21 04:08:43"
         },
         {
             "name": "classpreloader/classpreloader",
