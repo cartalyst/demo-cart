@@ -1,27 +1,41 @@
-## Laravel PHP Framework
+# Cart Demo
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+This is a basic demo showing some of the functionality of the Cart package.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+In this demo we are covering the following:
 
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+- Adding a product to the shopping cart
+- Removing a product from the shopping cart
+- Update the item quantity
+- Apply a coupon to the shopping cart
+- Clear the shopping cart
+- Adding a product to the wishlist
+- Removing a product from the wishlist
+- Clear the wishlist
+- Usage of various conditions
+- Store the whole shopping cart on the database
+- When logging in we are syncing the shopping cart back from the database
 
-## Official Documentation
+> *Note:* This demo is not a fully-fledged app. It's a demo, so we're not covering every possible scenario or completed every endpoint.
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+## Installation
 
-## Contributing
+To install this demo, firstly you must be a subscriber of Cartalyst's [Arsenal](https://cartalyst.com/arsenal).
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+1. Clone this repo by running `git clone git@github.com:cartalyst/demo-cart.git` on your CLI.
 
-## Security Vulnerabilities
+2. Setup your virtual host.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+3. Go into the directory in your terminal app and install the composer dependencies by running the `composer install` command on your CLI.
 
-### License
+4. Copy the `.env.example` file into `.env` and modify the database details
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+5. Run the `php artisan demo:install` command on your CLI.
+
+## Demo users
+
+Email               | Password
+------------------- | ----------------------------------------
+admin@admin.com     | password
+demo1@example.com   | password
+demo2@example.com   | password

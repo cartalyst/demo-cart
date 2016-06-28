@@ -138,12 +138,20 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         /*
+         * Package Service Providers...
+         */
+        Cartalyst\Sentinel\Laravel\SentinelServiceProvider::class,
+        Cartalyst\Converter\Laravel\ConverterServiceProvider::class,
+        Cartalyst\Cart\Laravel\CartServiceProvider::class,
+
+        /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\ComposerServiceProvider::class,
 
     ],
 
@@ -193,6 +201,9 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
 
+        'Cart'      => Cartalyst\Cart\Laravel\Facades\Cart::class,
+        'Converter' => Cartalyst\Converter\Laravel\Facades\Converter::class,
+        'Sentinel'  => Cartalyst\Sentinel\Laravel\Facades\Sentinel::class,
     ],
 
 ];
