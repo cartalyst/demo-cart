@@ -16,7 +16,7 @@ class CreateCartsTable extends Migration {
 			$table->increments('id');
 			$table->integer('user_id');
 			$table->string('instance');
-			$table->timestamps();
+			$table->nullableTimestamps();
 		});
 
 		Schema::create('carts_items', function($table)
@@ -25,7 +25,7 @@ class CreateCartsTable extends Migration {
 			$table->integer('cart_id');
 			$table->integer('product_id');
 			$table->integer('quantity');
-			$table->timestamps();
+			$table->nullableTimestamps();
 		});
 	}
 
