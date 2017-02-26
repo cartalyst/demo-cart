@@ -37,9 +37,9 @@ class DemoInstallCommand extends Command {
 	 */
 	public function fire()
 	{
-		$this->call('migrate', ['--package' => 'cartalyst/sentinel']);
-		$this->call('migrate');
-		$this->call('db:seed');
+		$this->call('migrate', ['--package' => 'cartalyst/sentinel', '--force' => true]);
+		$this->call('migrate', ['--force' => true]);
+		$this->call('db:seed', ['--force' => true]);
 	}
 
 	/**
