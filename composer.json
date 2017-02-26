@@ -11,11 +11,8 @@
 		"fzaninotto/faker" : "~1.4"
 	},
 	"repositories": [
-		{
-			"type": "composer",
-			"url": "http://packages.cartalyst.com"
-		}
-	],
+        { "type": "composer", "url": "https://packages.cartalyst.com" }
+    ],
 	"autoload": {
 		"classmap": [
 			"app/commands",
