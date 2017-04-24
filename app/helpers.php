@@ -1,7 +1,7 @@
 <?php
 
 use Cartalyst\Conditions\Condition;
-use Illuminate\Support\SerializableClosure;
+use SuperClosure\SerializableClosure;
 use Cartalyst\Converter\Laravel\Facades\Converter;
 
 function converter()

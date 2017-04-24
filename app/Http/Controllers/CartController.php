@@ -24,7 +24,11 @@ class CartController extends Controller
      */
     public function __construct(Cart $cart)
     {
-        $this->cart = $cart;
+        $this->middleware(function ($request, $next) use ($cart) {
+            $this->cart = $cart;
+
+            return $next($request);
+        });
     }
 
     /**
