@@ -7,9 +7,20 @@
         "laravel"
     ],
     "license": "MIT",
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.cartalyst.com"
+        }
+    ],
     "require": {
         "php": "^7.2",
+        "cartalyst/cart": "^3.0",
+        "cartalyst/conditions": "^3.0",
+        "cartalyst/converter": "^4.0",
+        "cartalyst/sentinel": "^3.0",
         "fideloper/proxy": "^4.0",
+        "jeremeamia/superclosure": "^2.4",
         "laravel/framework": "^6.2",
         "laravel/tinker": "^1.0"
     },
@@ -37,6 +48,9 @@
         "classmap": [
             "database/seeds",
             "database/factories"
+        ],
+        "files": [
+            "app/helpers.php"
         ]
     },
     "autoload-dev": {

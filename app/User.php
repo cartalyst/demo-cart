@@ -2,38 +2,17 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Cartalyst\Sentinel\Users\EloquentUser;
 
-class User extends Authenticatable
+class User extends EloquentUser
 {
-    use Notifiable;
-
     /**
-     * The attributes that are mass assignable.
+     * Returns the cart instances that belongs to this user.
      *
-     * @var array
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    public function carts()
+    {
+        return $this->hasMany(Cart::class, 'user_id');
+    }
 }
