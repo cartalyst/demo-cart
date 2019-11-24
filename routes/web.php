@@ -16,8 +16,8 @@ use App\Http\Controllers\Demo\HomeController;
 use App\Http\Controllers\Demo\WishlistController;
 
 Route::get('/', function () {
-    return redirect('/demo');
-    return view('welcome');
+    return redirect()->route('demo.home');
+    // return view('welcome');
 });
 
 Route::prefix('/demo')->group(function () {
